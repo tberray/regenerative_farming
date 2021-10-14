@@ -13,12 +13,13 @@ initializePassport(passport);
 
 const PORT = process.env.PORT || 4000;
 
-
+// use ejs for dynamic web pages - pages are in views folder with .ejs extension
 app.set("view engine", "ejs");
 
 // middleware to send stuff from front end to database
 app.use(express.urlencoded({ extended: false }));
 
+// passport is for saving cookies
 app.use(session({
     secret: "secret", 
     resave: false,
@@ -29,6 +30,7 @@ app.use(passport.session());
 
 app.use(flash());
 
+// render pages. checkAuthenticated and checkNotAuthenticated are defined below. first argument of get() is the extension to get to that page
 app.get('/', (req, res)=> {
     res.render('index');
 });
@@ -45,6 +47,7 @@ app.get("/users/dashboard", checkNotAuthenticated, (req, res)=> {
     res.render("dashboard", {user: req.user.name });
 });
 
+// if a user wants to log out, log them out and send them to login page
 app.get("/users/logout", (req, res)=>{
     req.logOut();
     req.flash("success_msg", "You have been logged out");
@@ -57,26 +60,31 @@ app.post("/users/register", async (req, res)=> {
 
     let errors = [];
 
+    // if they don't enter anything in a field, don't let them register
     if (!name || !email || !password || !password2) {
         errors.push({message: "Please enter all fields" });
     }
 
+    // secure passwords should have at least 6 characters
     if (password.length < 6) {
         errors.push({message: "Password should be at least 6 characters" });
     }
 
+    // confirm password must match password
     if (password != password2) {
         errors.push({message: "Passwords do not match" });
     }
 
     if(errors.length > 0) {
-        res.render("register", { errors });
+        res.render("register", { errors }); // re-render page with errors displayed in <ul>
     } else {
         // form validation has passed
 
+        // use bcrypt to hash passwords so they are not stored in plaintext in db
         let hashedPassword = await bcrypt.hash(password, 10);
         console.log(hashedPassword);
 
+        // pool is used to access db
         pool.query(
             `SELECT * FROM users
             WHERE email = $1`, [email], (err, results)=>{
@@ -131,6 +139,7 @@ function checkNotAuthenticated(req, res, next) {
     res.redirect("/users/login");
 }
 
+// listen on a port (4000)
 app.listen(PORT, ()=> {
     console.log(`Server running on port ${PORT}`);
 })

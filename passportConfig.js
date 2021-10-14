@@ -10,6 +10,8 @@ const authenticateUser = (email, password, done)=> {
             if(err) {
                 throw err;
             }
+            
+            // for debugging purposes
             console.log(results.rows);
 
             if(results.rows.length > 0) {
