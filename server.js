@@ -7,6 +7,7 @@ const flash = require("express-flash");
 const passport = require("passport");
 
 
+
 const initializePassport = require("./passportConfig");
 
 initializePassport(passport);
@@ -45,6 +46,10 @@ app.get("/users/login", checkAuthenticated, (req, res)=> {
 
 app.get("/users/dashboard", checkNotAuthenticated, (req, res)=> {
     res.render("dashboard", {user: req.user.name });
+});
+
+app.get("/users/test", (req, res)=> {
+    res.render("test");
 });
 
 // if a user wants to log out, log them out and send them to login page
