@@ -31,7 +31,7 @@ app.use(passport.session());
 
 app.use(flash());
 
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 
 
 // render pages. checkAuthenticated and checkNotAuthenticated are defined below. first argument of get() is the extension to get to that page
