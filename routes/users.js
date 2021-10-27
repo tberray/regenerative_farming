@@ -47,7 +47,9 @@ module.exports = (params) => {
 		} else {
 			// form validation has passed
 
-			models.User.findAll().then((users) => {
+			models.User.findAll().catch(error =>{
+				throw error;
+			}).then((users) => {
 				if(users !== undefined && users.length != 0) {
 					errors.push({message: "Email already registered"});
 					res.render("register", { errors })
@@ -56,6 +58,10 @@ module.exports = (params) => {
 						let hashedPassword = await bcrypt.hash(password, 10);
 						models.User.create({ name: name, email: email, password: hashedPassword }).then((user) => {
 							console.log(user);
+						}).catch(error => {
+							if(error) {
+								throw error;
+							}
 						});
 					})();
 					
