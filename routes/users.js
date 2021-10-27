@@ -1,5 +1,5 @@
 const express = require('express');
-const models = require('../models/index')
+const models = require('../sequelize/models/index')
 
 const router = express.Router();
 
@@ -48,7 +48,9 @@ module.exports = (params) => {
 			// form validation has passed
 
 			models.User.findAll().catch(error =>{
-				throw error;
+				if(error) {
+					throw error;
+				}
 			}).then((users) => {
 				if(users !== undefined && users.length != 0) {
 					errors.push({message: "Email already registered"});
