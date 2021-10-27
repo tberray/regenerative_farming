@@ -139,7 +139,7 @@ function checkNotAuthenticated(req, res, next) {
     res.redirect("/users/login");
 }
 
-// listen on a port (4000)
+// listen on a port (4200)
 app.listen(PORT, ()=> {
     console.log(`Server running on port ${PORT}`);
 })

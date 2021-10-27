@@ -15,9 +15,10 @@
 <body>
     
     <h1>Login</h1>
-    
-    <!--- <ul>s are for success and failure messages defined in server.js -->
-    <ul>
+
+    <!-- 
+        Angular doesn't seem to like this section so I commented it out for now
+        <ul>
         <% if(messages.success_msg) { %>
         <li><%= messages.success_msg %></li>
         <% } %>
@@ -27,7 +28,7 @@
         <% if(messages.error ) { %>
         <li><%= messages.error %> </li>
         <% } %>
-    </ul>
+    </ul> -->
 
     <form action="/users/login" method="POST">
         <div>

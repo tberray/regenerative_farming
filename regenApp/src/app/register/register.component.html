@@ -13,13 +13,15 @@
 <body>
     
     <h1>Register</h1>
-
-    <ul>
+    
+    <!-- 
+        Angular doesn't seem to like this section so I commented it out for now
+        <ul>
         <% if(typeof errors != 'undefined') { %> <% errors.forEach(error=>{ %>
         <li> <%= error.message %> </li>
         <% }) %> <% } %>
 
-    </ul>
+    </ul> -->
 
     <form action="/users/register" method="POST">
         <div>
