@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!--- temporary stylesheet because regular html looks ugly -->
-    <link
+    <!--link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css"
-    />
+    /-->
+
     <title>Document</title>
 </head>
 <body>
-    
+
     <h1>Login</h1>
 
     <!-- 
@@ -30,6 +31,10 @@
         <% } %>
     </ul> -->
 
+    
+
+
+
     <form action="/users/login" method="POST">
         <div>
             <input type="email" id="email" name="email" placeholder="Email" required />
@@ -40,8 +45,10 @@
         <div>
             <input type="submit" value="Login" />
         </div>
-        <a href="/users/register">Register</a>
+        <a href="./users/register">Register</a>
     </form>
 
+
+    
 </body>
 </html>
