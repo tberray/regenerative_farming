@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const { pool } = require("./dbConfig");
 const bcrypt = require("bcrypt");
 const session = require("express-session");
 const flash = require("express-flash");
@@ -34,7 +33,6 @@ app.use(flash());
 app.use('/', routes({
 	checkAuthenticated,
 	checkNotAuthenticated,
-	pool,
 	passport,
 	bcrypt,
 }));
