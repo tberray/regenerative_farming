@@ -26,3 +26,15 @@ body {
 .register-text {
     margin-left: 115px;
 }
+
+.form-labels {
+    width: 150px;
+}
+
+.form-inputs {
+    width: 400px;
+}
+
+.form-button {
+    width: 500px;
+}

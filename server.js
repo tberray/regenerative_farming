@@ -55,6 +55,10 @@ app.get("/users/test", (req, res)=> {
     res.render("test");
 });
 
+app.get("/users/datainput", (req, res)=> {
+    res.render("datainput");
+});
+
 // if a user wants to log out, log them out and send them to login page
 app.get("/users/logout", (req, res)=>{
     req.logOut();
