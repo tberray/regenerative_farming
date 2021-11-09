@@ -4,7 +4,6 @@ const models = require("./sequelize/models")
 
 function initialize (passport) {
     const authenticateUser = (email, password, done)=> {
-
         models.User.findAll({    
             where: {
             email: email
