@@ -1,38 +1,36 @@
 const LocalStrategy = require("passport-local").Strategy;
-const { pool } = require("./dbConfig");
 const bcrypt = require("bcrypt");
+const models = require("./sequelize/models")
 
 function initialize (passport) {
-const authenticateUser = (email, password, done)=> {
-    
-    pool.query(
-        `SELECT * FROM users WHERE email = $1`, [email], (err, results)=>{
-            if(err) {
-                throw err;
+    const authenticateUser = (email, password, done)=> {
+        models.User.findAll({    
+            where: {
+            email: email
+          }
+        }).catch(error =>{
+            if(error) {
+                throw error;
             }
-            
-            // for debugging purposes
-            console.log(results.rows);
-
-            if(results.rows.length > 0) {
-                const user = results.rows[0];
+        }).then((users) => {
+            console.log(users)
+            if(users !== undefined && users.length > 0) {
+                const user = users[0];
                 bcrypt.compare(password, user.password, (err, isMatch)=>{
                     if(err) {
                         throw err
                     }
-
                     if(isMatch) {
                         return done(null, user);
                     } else {
                         return done(null, false, {message: "Password is not correct" });
                     }
-                })
+                });
             } else {
-                return done(null, false, {message: "Email is not registered"});
+                return done(null, false, {message: "Email is not registered"}); 
             }
-        }
-    )
-}
+        });
+    }
 
     passport.use(
         new LocalStrategy(
@@ -47,11 +45,12 @@ const authenticateUser = (email, password, done)=> {
     passport.serializeUser((user, done)=> done(null, user.id));
 
     passport.deserializeUser((id, done)=>{
-        pool.query(`SELECT * FROM users WHERE id = $1`, [id], (err, results)=>{
-            if (err) {
-                throw err
+        models.User.findAll({ where: {id: id} }).catch(error =>{
+            if(error) {
+                throw error;
             }
-            return done(null, results.rows[0]);
+        }).then((users) => {
+            return done(null, users[0]);
         });
     });
 }
