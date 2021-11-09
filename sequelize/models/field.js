@@ -1,26 +1,25 @@
 'use strict';
 const {
-  Model
+  Model, UniqueConstraintError
 } = require('sequelize');
-const field = require('./field');
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class Field extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      Field.belongsTo(models.User);
       // define association here
     }
   };
-  User.init({
-    name: {type: DataTypes.STRING, allowNull: false},
-    email: {type: DataTypes.STRING, unique: true, allowNull: false},
-    password: {type: DataTypes.STRING, allowNull: false}
+  Field.init({
+    address: DataTypes.STRING,
+    size: DataTypes.DOUBLE
   }, {
     sequelize,
-    modelName: 'User',
+    modelName: 'Field',
   });
-  return User;
+  return Field;
 };
