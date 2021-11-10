@@ -17,6 +17,10 @@ module.exports = (params) => {
 	router.get("/dashboard", checkNotAuthenticated, (req, res)=> {
 		res.render("dashboard", {user: req.user.name });
 	});
+
+	router.get("/datainput", (req, res)=> {
+		res.render("datainput");
+	});
 	
 	router.get("/logout", (req, res)=>{
 		req.logOut();
