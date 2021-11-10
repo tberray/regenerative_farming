@@ -56,7 +56,7 @@ module.exports = (params) => {
 					throw error;
 				}
 			}).then((users) => {
-				if(users !== undefined && users.length != 0) {
+				if(!(users !== undefined && users.length != 0)) {
 					errors.push({message: "Email already registered"});
 					res.render("register", { errors })
 				} else {
