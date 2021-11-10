@@ -1,0 +1,40 @@
+body {
+    background-color: #b3ffae;
+}
+
+
+
+
+.login-form {
+    margin-left: -100px;
+}
+
+.login-form-errors {
+    margin-left: -100px;
+    color: red;
+}
+
+
+.bottom-form {
+    margin-bottom: 5px;
+}
+
+.register-form {
+    margin-left: -65px;
+}
+
+.register-text {
+    margin-left: 115px;
+}
+
+.form-labels {
+    width: 150px;
+}
+
+.form-inputs {
+    width: 400px;
+}
+
+.form-button {
+    width: 500px;
+}
