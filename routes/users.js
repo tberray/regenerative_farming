@@ -21,6 +21,10 @@ module.exports = (params) => {
 	router.get("/datainput", (req, res)=> {
 		res.render("datainput");
 	});
+
+	router.get("/resources", (req, res)=> {
+		res.render("resources");
+	});
 	
 	router.get("/logout", (req, res)=>{
 		req.logOut();
