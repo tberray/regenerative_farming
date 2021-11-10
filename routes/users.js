@@ -17,6 +17,14 @@ module.exports = (params) => {
 	router.get("/dashboard", checkNotAuthenticated, (req, res)=> {
 		res.render("dashboard", {user: req.user.name });
 	});
+
+	router.get("/datainput", (req, res)=> {
+		res.render("datainput");
+	});
+
+	router.get("/resources", (req, res)=> {
+		res.render("resources");
+	});
 	
 	router.get("/logout", (req, res)=>{
 		req.logOut();
@@ -52,7 +60,7 @@ module.exports = (params) => {
 					throw error;
 				}
 			}).then((users) => {
-				if(users !== undefined && users.length != 0) {
+				if(!(users !== undefined && users.length != 0)) {
 					errors.push({message: "Email already registered"});
 					res.render("register", { errors })
 				} else {
