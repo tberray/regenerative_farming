@@ -17,36 +17,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <!-- navbar -->
-    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #d1ffce;">
-        <a class="navbar-brand" href="#">
-            <img src="http://localhost:4000/images/rf.jpg" width="40" height="40" class="d-inline-block align-top rounded" alt="RF">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-    
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-            <a class="nav-link" href="http://localhost:4000/users/dashboard">Dashboard <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-            </li>
-            <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Get Started
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="http://localhost:4000/users/login">Log in</a>
-                <a class="dropdown-item" href="http://localhost:4000/users/register">Register</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item disabled" href="#">Log out</a>
-            </div>
-            </li> 
-        </ul>
-        </div>
-    </nav>
+    <%- include('partials/navbar') %>
     <!--navbar end-->
 
     
