@@ -29,6 +29,10 @@ module.exports = (params) => {
 	router.get("/about", (req, res)=> {
 		res.render("about");
 	});
+
+	router.get("/test", (req, res)=> {
+		res.render("test");
+	});
 	
 	router.get("/logout", (req, res)=>{
 		req.logOut();
