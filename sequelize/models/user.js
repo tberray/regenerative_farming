@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const field = require('./field');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
