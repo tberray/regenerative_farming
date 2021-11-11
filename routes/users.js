@@ -6,6 +6,10 @@ const router = express.Router();
 module.exports = (params) => {
 	const {checkNotAuthenticated, checkAuthenticated, pool, passport, bcrypt} = params;
 
+	router.get("/", (req, res) => {
+		res.redirect("/users/login");
+	});
+
 	router.get("/register", checkAuthenticated, (req, res)=> {
 		res.render("register");
 	});
@@ -112,6 +116,16 @@ module.exports = (params) => {
 			failureFlash: true
 		})
 	);
+
+	router.get("/account", checkNotAuthenticated, (req, res) => {
+		res.render("account");
+	});
+
+	router.post("/account", checkNotAuthenticated, (req, res) => {
+		// TODO: handle account modification.
+
+		res.render("account");
+	});
 
 	return router;
 }
