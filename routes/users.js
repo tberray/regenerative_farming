@@ -60,14 +60,15 @@ module.exports = (params) => {
 					throw error;
 				}
 			}).then((users) => {
-				if(!(users !== undefined && users.length != 0)) {
+				// console.log(users)
+				if(users.length > 0) {
 					errors.push({message: "Email already registered"});
 					res.render("register", { errors })
 				} else {
 					(async() => {
 						let hashedPassword = await bcrypt.hash(password, 10);
 						models.User.create({ name: name, email: email, password: hashedPassword }).then((user) => {
-							console.log(user);
+							// console.log(user);
 						}).catch(error => {
 							if(error) {
 								throw error;
