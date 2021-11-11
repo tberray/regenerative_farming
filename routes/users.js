@@ -6,6 +6,10 @@ const router = express.Router();
 module.exports = (params) => {
 	const {checkNotAuthenticated, checkAuthenticated, pool, passport, bcrypt} = params;
 
+	router.get("/", (req, res) => {
+		res.redirect("/users/login");
+	});
+
 	router.get("/register", checkAuthenticated, (req, res)=> {
 		res.render("register");
 	});
@@ -18,8 +22,20 @@ module.exports = (params) => {
 		res.render("dashboard", {user: req.user.name });
 	});
 
-	router.get("/datainput", (req, res)=> {
-		res.render("datainput");
+	router.get("/datainput", checkNotAuthenticated, (req, res)=> {
+		res.render("datainput", {
+			"fields": ["Field1", "Field2", "Field3"], // placeholder
+		});
+	});
+
+	router.post("/datainput", checkNotAuthenticated, (req, res) => {
+		let  i = { field, ph, nitrogen, phosphorus, potassium, temperature, forc, co2, infiltration, bulkDensity, conductivity, stability, slaking, earthworms, penetrationResist } = req.body;
+		for (let j in i)
+			i[j] = i[j] === '' ? null : i[j];
+
+		
+
+		res.redirect("/users/dashboard"); // temporary
 	});
 
 	router.get("/resources", (req, res)=> {
@@ -100,6 +116,16 @@ module.exports = (params) => {
 			failureFlash: true
 		})
 	);
+
+	router.get("/account", checkNotAuthenticated, (req, res) => {
+		res.render("account");
+	});
+
+	router.post("/account", checkNotAuthenticated, (req, res) => {
+		// TODO: handle account modification.
+
+		res.render("account");
+	});
 
 	return router;
 }

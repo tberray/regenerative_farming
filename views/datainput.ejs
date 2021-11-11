@@ -37,7 +37,7 @@
 
     <!--form-->
     <div class="container">
-    <form action="#">
+    <form action="/users/datainput" method="POST">
 
         <!--Field-->
         <div class="row">
@@ -46,9 +46,11 @@
             </div>
             <div class="input-column">
                 <select id="field" class="form-inputs" name="field">
-                    <option value="Field1">Field1</option>
-                    <option value="Field2">Field2</option>
-                    <option value="Field3">Field3</option>
+                    <% if (typeof(fields) !== undefined) { %>
+                    <% for (let field of fields) { %>
+                    <option value="<%= field %>"><%= field %></option>
+                    <% } %>
+                    <% } %>
                     </select>
             </div>
 
@@ -150,7 +152,7 @@
                 <label for="bulk-density" class="form-labels">Bulk Density</label>
             </div>
             <div class="input-column">
-                <input type="number" class="form-inputs" step=.1 min=0 id="bulk-density" name="bulk-density" placeholder="Bulk Density in g/cm^3">
+                <input type="number" class="form-inputs" step=.1 min=0 id="bulk-density" name="bulkDensity" placeholder="Bulk Density in g/cm^3">
             </div>
             
             <p data-toggle="tooltip" title="(weight of soil per volume)">[?]</p>
@@ -212,7 +214,7 @@
                 <label for="penetration-resist" class="form-labels">Penetration Resistance</label>
             </div>
             <div class="input-column">
-                <input type="number" class="form-inputs" step=.1 min=0 id="penetration-resist" name="penetration-resist" placeholder="Penetration Resistance in kPa">
+                <input type="number" class="form-inputs" step=.1 min=0 id="penetration-resist" name="penetrationResist" placeholder="Penetration Resistance in kPa">
             </div>
             <p data-toggle="tooltip" title="measures force required to insert a metal rod into soil">[?]</p>
         </div>
