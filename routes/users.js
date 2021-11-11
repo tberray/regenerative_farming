@@ -49,6 +49,12 @@ module.exports = (params) => {
 	router.get("/test", (req, res)=> {
 		res.render("test");
 	});
+
+	router.get("/field-input", checkNotAuthenticated, (req, res)=> {
+		res.render("field-input", {
+			"fields": ["Field1", "Field2", "Field3"], // placeholder
+		});
+	});
 	
 	router.get("/logout", (req, res)=>{
 		req.logOut();
