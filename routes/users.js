@@ -18,8 +18,18 @@ module.exports = (params) => {
 		res.render("dashboard", {user: req.user.name });
 	});
 
-	router.get("/datainput", (req, res)=> {
+	router.get("/datainput", checkNotAuthenticated, (req, res)=> {
 		res.render("datainput");
+	});
+
+	router.post("/datainput", checkNotAuthenticated, (req, res) => {
+		let  i = { field, ph, nitrogen, phosphorus, potassium, temperature, forc, co2, infiltration, bulkDensity, conductivity, stability, slaking, earthworms, penetrationResist } = req.body;
+		for (let j in i)
+			i[j] = i[j] === '' ? null : i[j];
+
+		console.log(i);
+
+		rs.render("datainput");
 	});
 
 	router.get("/resources", (req, res)=> {
