@@ -4,7 +4,7 @@ const models = require('../sequelize/models/index')
 const router = express.Router();
 
 module.exports = (params) => {
-	const {checkNotAuthenticated, checkAuthenticated, pool, passport, bcrypt} = params;
+	const {checkNotAuthenticated, checkAuthenticated, isAuthenticated, pool, passport, bcrypt} = params;
 
 	router.get("/", (req, res) => {
 		res.redirect("/users/login");
@@ -38,11 +38,11 @@ module.exports = (params) => {
 		res.redirect("/users/dashboard"); // temporary
 	});
 
-	router.get("/resources", (req, res)=> {
+	router.get("/resources", isAuthenticated, (req, res)=> {
 		res.render("resources");
 	});
 
-	router.get("/about", (req, res)=> {
+	router.get("/about", isAuthenticated, (req, res)=> {
 		res.render("about");
 	});
 
@@ -51,9 +51,7 @@ module.exports = (params) => {
 	});
 
 	router.get("/field-input", checkNotAuthenticated, (req, res)=> {
-		res.render("field-input", {
-			"fields": ["Field1", "Field2", "Field3"], // placeholder
-		});
+		res.render("field-input");
 	});
 	
 	router.get("/logout", (req, res)=>{
@@ -85,7 +83,7 @@ module.exports = (params) => {
 		} else {
 			// form validation has passed
 
-			models.User.findAll().catch(error =>{
+			models.User.findAll({where:{email: email}}).catch(error =>{
 				if(error) {
 					throw error;
 				}

@@ -12,6 +12,11 @@ body {
     color: red;
 }
 
+.login-form-nonerrors {
+    margin-left: -100px;
+    color: black;
+}
+
 
 .bottom-form {
     margin-bottom: 5px;

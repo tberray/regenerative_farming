@@ -35,6 +35,7 @@ app.use(flash());
 app.use('/', routes({
 	checkAuthenticated,
 	checkNotAuthenticated,
+    isAuthenticated,
 	passport,
 	bcrypt,
 }));
@@ -161,6 +162,14 @@ function checkNotAuthenticated(req, res, next) {
 	}
 
 	res.redirect("/users/login");
+}
+
+function isAuthenticated(req, res, next) {
+    if (req.isAuthenticated()){
+        req.flash("authenticated", true);
+        return next()
+	}
+    next();
 }
 
 // listen on a port (4000)
