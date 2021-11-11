@@ -8,9 +8,8 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      fieldId : {
+      FieldId : {
         type: Sequelize.INTEGER,
-        autoIncrement: true,
         references: {
           model: 'Fields',
           key: 'id', 

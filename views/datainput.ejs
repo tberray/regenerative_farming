@@ -49,7 +49,7 @@
                 <select id="field" class="form-inputs" name="field">
                     <% if (typeof(fields) !== undefined) { %>
                     <% for (let field of fields) { %>
-                    <option value="<%= field %>"><%= field %></option>
+                    <option value="<%= field.id %>"><%= field.address %></option>
                     <% } %>
                     <% } %>
                     </select>
