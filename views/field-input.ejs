@@ -35,31 +35,52 @@
 
     <!--title and instructions end-->
 
+    
+
     <!--form-->
     <div class="container">
-    <form action="/users/datainput" method="POST">
-
-        <!--Field-->
+        <form action="/users/datainput" method="POST">
+    
+        <!--field name-->
         <div class="row">
             <div class="label-column">
-                <label for="field" class="form-labels">Field</label>
+                <label for="field-name" class="form-labels">Field Name</label>
             </div>
             <div class="input-column">
-                <select id="field" class="form-inputs" name="field">
-                    <% if (typeof(fields) !== undefined) { %>
-                    <% for (let field of fields) { %>
-                    <option value="<%= field %>"><%= field %></option>
-                    <% } %>
-                    <% } %>
-                    </select>
+                <input type="text" class="form-inputs"  id="field-name" name="field-name" placeholder="field-name">
             </div>
+            <p data-toggle="tooltip" title="Pick a name for your field">[?]</p>
+        </div>
+        
+        <!--address-->
+        <div class="row">
+            <div class="label-column">
+                <label for="address" class="form-labels">Address</label>
+            </div>
+            <div class="input-column">
+                <input type="text" class="form-inputs"  id="address" name="address" placeholder="address">
+            </div>
+            <p data-toggle="tooltip" title="physical address where field is located">[?]</p>
+        </div>
+
+        <!--Acreage-->
+        <div class="row">
+            <div class="label-column">
+                <label for="acreage" class="form-labels">Acreage</label>
+            </div>
+            <div class="input-column">
+                <input type="number" class="form-inputs" step=1 min=0 max=500 id="acreage" name="acreage" placeholder="Acreage in acres">
+            </div>
+            <p data-toggle="tooltip" title="How big is your field/farm?">[?]</p>
+        </div>
+            
 
             <!--button-->
             <div class="pt-1">
                 <input type="submit" class="btn btn-success form-button" value="Submit" />
             </div>
 
-    </form>
+        </form>
 
     </div>
     <!--form end-->
