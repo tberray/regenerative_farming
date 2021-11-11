@@ -164,6 +164,8 @@ function checkNotAuthenticated(req, res, next) {
 	res.redirect("/users/login");
 }
 
+// used by resources and about page so the navbar works correctly if you are/not logged in
+// not sure if every line in here is necessary but it seems to work
 function isAuthenticated(req, res, next) {
     if (req.isAuthenticated()){
         req.flash("authenticated", true);
