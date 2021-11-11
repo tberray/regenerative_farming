@@ -23,15 +23,24 @@ module.exports = (params) => {
 	});
 
 	router.get("/datainput", checkNotAuthenticated, (req, res)=> {
-		res.render("datainput", {
-			"fields": ["Field1", "Field2", "Field3"], // placeholder
+		models.Field.findAll({where: {UserId:req.user.id}}).catch(error =>{
+			if(error) {
+				throw error;
+			}
+		}).then((fields) => {
+			res.render("datainput", {
+				"fields": fields, // placeholder
+			});
 		});
+		
 	});
 
 	router.post("/datainput", checkNotAuthenticated, (req, res) => {
 		let  i = { field, ph, nitrogen, phosphorus, potassium, temperature, forc, co2, infiltration, bulkDensity, conductivity, stability, slaking, earthworms, penetrationResist } = req.body;
 		for (let j in i)
 			i[j] = i[j] === '' ? null : i[j];
+
+		models.SoilEntry.create({FieldId:field, pH:ph, nitrate:nitrogen, phosphorus:phosphorus, potassium:potassium, tempterature:temperature, pct_co2:co2, infiltration: infiltration, blk_density:bulkDensity, conductivity:conductivity, agg_stability:stability, slaking_rating:slaking, earthworm_count:earthworms, pen_resistance:penetrationResist});
 
 		
 
@@ -51,10 +60,15 @@ module.exports = (params) => {
 	});
 
 	router.get("/field-input", checkNotAuthenticated, (req, res)=> {
-		res.render("field-input", {
-			"fields": ["Field1", "Field2", "Field3"], // placeholder
-		});
+		res.render("field-input");
 	});
+
+	router.post("/field-input",(req, res) =>{
+		var user_id = req.user.id;
+		let {fieldname, address, acreage} = req.body;
+		models.Field.create({UserId:user_id, address:address,size:acreage});
+		res.redirect("/users/datainput");
+	})
 	
 	router.get("/logout", (req, res)=>{
 		req.logOut();
@@ -85,7 +99,7 @@ module.exports = (params) => {
 		} else {
 			// form validation has passed
 
-			models.User.findAll().catch(error =>{
+			models.User.findAll({where:{email: email}}).catch(error =>{
 				if(error) {
 					throw error;
 				}
