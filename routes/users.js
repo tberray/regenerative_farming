@@ -19,7 +19,9 @@ module.exports = (params) => {
 	});
 
 	router.get("/datainput", checkNotAuthenticated, (req, res)=> {
-		res.render("datainput");
+		res.render("datainput", {
+			"fields": ["Field1", "Field2", "Field3"], // placeholder
+		});
 	});
 
 	router.post("/datainput", checkNotAuthenticated, (req, res) => {
@@ -27,9 +29,9 @@ module.exports = (params) => {
 		for (let j in i)
 			i[j] = i[j] === '' ? null : i[j];
 
-		console.log(i);
+		
 
-		rs.render("datainput");
+		res.redirect("/users/dashboard"); // temporary
 	});
 
 	router.get("/resources", (req, res)=> {

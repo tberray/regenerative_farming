@@ -35,9 +35,11 @@
             </div>
             <div class="input-column">
                 <select id="field" class="form-inputs" name="field">
-                    <option value="Field1">Field1</option>
-                    <option value="Field2">Field2</option>
-                    <option value="Field3">Field3</option>
+                    <% if (typeof(fields) !== undefined) { %>
+                    <% for (let field of fields) { %>
+                    <option value="<%= field %>"><%= field %></option>
+                    <% } %>
+                    <% } %>
                     </select>
             </div>
         </div>
