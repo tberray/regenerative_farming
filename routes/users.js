@@ -36,11 +36,14 @@ module.exports = (params) => {
 	});
 
 	router.post("/datainput", checkNotAuthenticated, (req, res) => {
-		let  i = { field, ph, nitrogen, phosphorus, potassium, temperature, forc, co2, infiltration, bulkDensity, conductivity, stability, slaking, earthworms, penetrationResist } = req.body;
-		for (let j in i)
-			i[j] = i[j] === '' ? null : i[j];
-
-		models.SoilEntry.create({FieldId:field, pH:ph, nitrate:nitrogen, phosphorus:phosphorus, potassium:potassium, tempterature:temperature, pct_co2:co2, infiltration: infiltration, blk_density:bulkDensity, conductivity:conductivity, agg_stability:stability, slaking_rating:slaking, earthworm_count:earthworms, pen_resistance:penetrationResist});
+		let i = req.body;
+		
+		for (let j in i) {
+			console.log(i[j]);
+			i[j] = i[j] === '' ? null : Number(i[j]);
+		}
+		
+		models.SoilEntry.create({FieldId:i.field, pH:i.ph, nitrate:i.nitrogen, phosphorus:i.phosphorus, potassium:i.potassium, tempterature:i.temperature, pctCo2:i.co2, infiltration:i.infiltration, blkDensity:i.bulkDensity, conductivity:i.conductivity, aggStability:i.stability, slakingRating:i.slaking, earthwormCount:i.earthworms, penResistance:i.penetrationResist});
 
 		
 

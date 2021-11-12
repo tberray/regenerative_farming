@@ -20,14 +20,14 @@ module.exports = (sequelize, DataTypes) => {
     phosphorus: DataTypes.INTEGER,
     potassium: DataTypes.INTEGER,
     temperature: DataTypes.DOUBLE,
-    pct_co2: DataTypes.DOUBLE,
+    pctCo2: DataTypes.DOUBLE,
     infiltration: DataTypes.DOUBLE,
-    blk_density: DataTypes.DOUBLE,
+    blkDensity: DataTypes.DOUBLE,
     conductivity: DataTypes.DOUBLE,
-    agg_stability: DataTypes.DOUBLE,
-    slaking_rating: DataTypes.DOUBLE,
-    earthworm_count: DataTypes.INTEGER,
-    pen_resistance: DataTypes.DOUBLE
+    aggStability: DataTypes.DOUBLE,
+    slakingRating: DataTypes.DOUBLE,
+    earthwormCount: DataTypes.INTEGER,
+    penResistance: DataTypes.DOUBLE
   }, {
     sequelize,
     modelName: 'SoilEntry',
