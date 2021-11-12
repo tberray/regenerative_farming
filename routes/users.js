@@ -32,22 +32,46 @@ module.exports = (params) => {
 				"fields": fields, // placeholder
 			});
 		});
-		
 	});
 
 	router.post("/datainput", checkNotAuthenticated, (req, res) => {
 		let i = req.body;
+		let allNull = true;
 		
 		for (let j in i) {
-			console.log(i[j]);
-			i[j] = i[j] === '' ? null : Number(i[j]);
+			// console.log(i[j]);
+			i[j] = i[j] === '' ? null : i[j];
 		}
-		
-		models.SoilEntry.create({FieldId:i.field, pH:i.ph, nitrate:i.nitrogen, phosphorus:i.phosphorus, potassium:i.potassium, tempterature:i.temperature, pctCo2:i.co2, infiltration:i.infiltration, blkDensity:i.bulkDensity, conductivity:i.conductivity, aggStability:i.stability, slakingRating:i.slaking, earthwormCount:i.earthworms, penResistance:i.penetrationResist});
 
-		
+		for (let j in i) {
+			if (i[j] === null)
+				continue;
 
-		res.redirect("/users/dashboard"); // temporary
+			const value = Number(i[j]);
+			if (!isNaN(value)) {
+				i[j] = value;
+				if (j !== "field") {
+					console.log(j);
+					allNull = false;
+				}
+			}
+			else {
+				req.flash("message", `Error: ${j} must be a number`);
+				res.redirect("/users/datainput");
+			}
+		}
+
+		if (allNull) {
+			req.flash("message", "Error: you must enter at least one valid data point");
+			res.redirect("/users/datainput");
+		}
+		else {
+			models.SoilEntry.create({FieldId:i.field, pH:i.ph, nitrate:i.nitrogen, phosphorus:i.phosphorus, potassium:i.potassium, tempterature:i.temperature, pctCo2:i.co2, infiltration:i.infiltration, blkDensity:i.bulkDensity, conductivity:i.conductivity, aggStability:i.stability, slakingRating:i.slaking, earthwormCount:i.earthworms, penResistance:i.penetrationResist});
+
+			req.flash("message", "Success!");
+
+			res.redirect("/users/datainput"); // temporary
+		}
 	});
 
 	router.get("/resources", isAuthenticated, (req, res)=> {
@@ -69,9 +93,14 @@ module.exports = (params) => {
 	router.post("/field-input",(req, res) =>{
 		var user_id = req.user.id;
 		let {fieldname, address, acreage} = req.body;
+		if (isNaN(Number(acreage))) {
+			req.flash("errors", "Error: acreage must be a number");
+			res.render("field-input");
+		}
+		req.flash("message", "Success!");
 		models.Field.create({UserId:user_id, address:address,size:acreage});
 		res.redirect("/users/datainput");
-	})
+	});
 	
 	router.get("/logout", (req, res)=>{
 		req.logOut();

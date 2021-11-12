@@ -31,8 +31,12 @@
             Hover over the [?] for helpful tips.
         </p>
         <a href="/users/field-input">Click to add a new field</a>
+        <% if (messages.message) { %>
+            <p><%= messages.message %></p>
+        <% } %>
     </div>
     <br>
+
 
     <!--title and instructions end-->
 
