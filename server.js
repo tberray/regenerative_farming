@@ -1,5 +1,3 @@
-const express = require('express');
-// const app = express();
 const bcrypt = require("bcrypt");
 const session = require("express-session");
 const flash = require("express-flash");
