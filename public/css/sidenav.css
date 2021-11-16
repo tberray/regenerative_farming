@@ -18,7 +18,7 @@
   border: solid 1px rgb(0, 0, 0);
 }
 .sidebar.close{
-  width: 78px;  /* for all body content put margin-left 78px to account for sidenav */
+  width: 78px;  /* for all body content put margin-left 78px to account for sidenav if the sidenav blocks stuff */
 }
 .sidebar .logo-details{
   height: 60px;
