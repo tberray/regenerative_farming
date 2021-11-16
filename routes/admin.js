@@ -16,9 +16,16 @@ module.exports = (params) => {
 		res.render("admin-login");
 	});
 
-	router.get("/dashboard", (req, res) => {
-		res.render("admin-dashboard");
-	})
+	router.get("/dashboard", async (req, res) => {
+		let users = await models.User.findAll();
+		let fields = await models.Field.findAll();
+		let soilEntries = await models.SoilEntry.findAll();
+		res.render("admin-dashboard", {
+			users,
+			fields,
+			soilEntries,
+		});
+	});
 
 	return router;
 }

@@ -31,8 +31,12 @@
             Hover over the [?] for helpful tips.
         </p>
         <a href="/users/field-input">Click to add a new field</a>
+        <% if (messages.message) { %>
+            <p><%= messages.message %></p>
+        <% } %>
     </div>
     <br>
+
 
     <!--title and instructions end-->
 
@@ -107,7 +111,7 @@
         </div>
 
         <!--temp-->
-        <div class="row">
+        <!-- <div class="row">
             <div class="label-column">
                 <label for="temperature" class="form-labels">Temperature</label>
             </div>
@@ -121,7 +125,7 @@
                     </select>
             </div>
             <p data-toggle="tooltip" title="temperature in either C or F">[?]</p>
-        </div>
+        </div> -->
 
         <!--co2-->
         <!-- can use for Soil Respiration (lb CO2 -C/acre/day) = PF x TF x (%CO2 - 0.035) x 22.91 x H-->

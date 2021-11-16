@@ -16,5 +16,35 @@
     <%- include('partials/navbar') %>
     <!--navbar end-->
 	<h1>Admin dashboard</h1>
+
+    <h2>Users</h2>
+	<table style="border: 1px solid black; border-collapse: collapse;">
+	<% for (let user of users) { %>
+		<tr>
+			<td style="border: 1px solid black;"><%= user.dataValues.name %></td>
+			<td style="border: 1px solid black;"><%= user.dataValues.email %></td>
+		</tr>
+	<% } %>
+	</table>
+
+    <h2>Fields</h2>
+	<table style="border: 1px solid black; border-collapse: collapse;">
+	<% for (let field of fields) { %>
+		<tr>
+			<td style="border: 1px solid black;"><%= field.dataValues.address %></td>
+			<td style="border: 1px solid black;"><%= field.dataValues.size %></td>
+		</tr>
+	<% } %>
+	</table>
+
+    <h2>Soil Entries</h2>
+	<table style="border: 1px solid black; border-collapse: collapse;">
+	<% for (let soil of soilEntries) { %>
+		<tr>
+			<td style="border: 1px solid black;"><%= soil.dataValues.pH %></td>
+			<td style="border: 1px solid black;"><%= soil.dataValues.nitrate %></td>
+		</tr>
+	<% } %>
+	</table>
 </body>
 </html>
