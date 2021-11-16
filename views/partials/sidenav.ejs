@@ -1,0 +1,66 @@
+<link rel="stylesheet" href="http://localhost:4000/css/sidenav.css">
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    
+    <!--go to https://boxicons.com to find icons and click where it says fonts for the <i class=''></i> (icon)-->
+    <% if(messages.authenticated) { %>
+    <div class="sidebar close">
+        <div class="logo-details">
+          <i class='bx bx-menu menu-button' ></i>
+        </div>
+        <ul class="nav-links">
+          <li>
+            <a href="/users/dashboard">
+              <i class='bx bx-home'></i>
+              <span class="link_name">Dashboard</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="/users/dashboard">Dashboard</a></li>
+            </ul>
+          </li>
+  
+          <li>
+            <div class="iocn-link">
+              <a href="#">
+                <i class='bx bx-data' ></i>
+                <span class="link_name">Enter Data</span>
+              </a>
+              <i class='bx bxs-chevron-down arrow' ></i>
+            </div>
+            <ul class="sub-menu">
+              <li><a class="link_name" href="#">Enter Data</a></li>
+              <li><a href="/users/field-input">Create Field</a></li>
+              <li><a href="/users/datainput">Enter Data for Field</a></li>
+              
+            </ul>
+          </li>
+  
+          <li>
+            <a href="/users/account">
+              <i class='bx bx-cog' ></i>
+              <span class="link_name">Settings</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="/users/account">Settings</a></li>
+            </ul>
+          </li>
+          
+        </ul>
+      </div>
+      <% } %>
+
+      <script>
+        let arrow = document.querySelectorAll(".arrow");
+        for (var i = 0; i < arrow.length; i++) {
+          arrow[i].addEventListener("click", (e)=>{
+            let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+            arrowParent.classList.toggle("showMenu");
+          });
+        }
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".bx-menu");
+        console.log(sidebarBtn);
+        sidebarBtn.addEventListener("click", ()=>{
+          sidebar.classList.toggle("close");
+        });
+        </script>
+        

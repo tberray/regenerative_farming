@@ -3,6 +3,10 @@ body {
     background-color: #b3ffae;
 }
 
+.content {
+    margin-left: 78px;
+}
+
 .login-form {
     margin-left: -100px;
 }

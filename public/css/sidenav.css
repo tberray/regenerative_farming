@@ -18,7 +18,7 @@
   border: solid 1px rgb(0, 0, 0);
 }
 .sidebar.close{
-  width: 78px;
+  width: 78px;  /* for all body content put margin-left 78px to account for sidenav */
 }
 .sidebar .logo-details{
   height: 60px;
@@ -249,78 +249,3 @@
 
 /*************************************************************************/
 
-body {
-    background-color: #b3ffae;
-}
-
-.login-form {
-    margin-left: -100px;
-}
-
-.login-form-errors {
-    margin-left: -100px;
-    color: red;
-}
-
-
-.bottom-form {
-    margin-bottom: 5px;
-}
-
-.register-form {
-    margin-left: -65px;
-}
-
-.register-text {
-    margin-left: 115px;
-}
-
-.form-labels {
-    width: 150px;
-}
-
-.form-inputs {
-    width: 400px;
-}
-.form-inputs2 {
-    width: 280px;
-}
-.form-third {
-    width: 120px;
-}
-
-.form-button {
-    width: 500px;
-}
-
-.about-paragraph {
-    width: 700px;
-
-}
-
-.tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black;
-  }
-  
-  .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-    top: 100%;
-    left: 50%;
-    margin-left: -60px;
-  }
-  
-  .tooltip:hover .tooltiptext {
-    visibility: visible;
-  }
