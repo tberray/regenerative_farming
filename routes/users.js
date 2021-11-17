@@ -82,8 +82,13 @@ module.exports = (params) => {
 		res.render("about");
 	});
 
-	router.get("/test", (req, res)=> {
+	// not needed but you can use if you want to test something
+	router.get("/test", isAuthenticated, (req, res)=> {
 		res.render("test");
+	});
+
+	router.get("/confirmation-page", isAuthenticated, (req, res)=> {
+		res.render("confirmation-page");
 	});
 
 	router.get("/field-input", checkNotAuthenticated, (req, res)=> {
