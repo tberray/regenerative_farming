@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-md navbar-light" style="background-color: #d1ffce; border: solid 1px black;">
+<link rel="stylesheet" href="/css/style.css">
+<nav class="navbar navbar-expand-md navbar-light" style="background-color: #d1ffce; border: solid 1px black; position: fixed; width: 100%; top:0px;">
     <a class="navbar-brand" href="#">
         <img src="/images/rf.jpg" width="40" height="40" class="d-inline-block align-top rounded" alt="RF">
     </a>
@@ -24,6 +25,7 @@
             <a class="dropdown-item" href="/users/register">Register</a>
             <% } %>
             <a class="dropdown-item" href="/users/resources">Resources</a>
+            <a class="dropdown-item" href="/users/terms-info">Soil Terms</a>
             <% if(messages.authenticated) { %>
             <a class="dropdown-item" href="/users/field-input">Field Input</a>
             <a class="dropdown-item" href="/users/datainput">Input Data</a>

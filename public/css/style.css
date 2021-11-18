@@ -5,6 +5,10 @@ body {
 
 .content {
     margin-left: 78px;
+    margin-top: 78px;
+}
+.content-no-sidenav {
+    margin-top: 78px;
 }
 
 .login-form {
@@ -53,21 +57,24 @@ body {
 }
 
 .about-paragraph {
-    width: 700px;
+    width: 70%;
+}
 
+.terms-info {
+    width: 80%;
+}
+.sub-heading {
+    text-decoration: underline;
 }
 
 .tooltip {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted black;
 }
   
 .tooltip .tooltiptext {
     visibility: hidden;
     width: 120px;
-    background-color: black;
-    color: #fff;
     text-align: center;
     border-radius: 6px;
     padding: 5px 0;
@@ -82,6 +89,10 @@ body {
   
 .tooltip:hover .tooltiptext {
     visibility: visible;
+}
+
+.nav-item{
+    text-align: right;
 }
 
 /************************** dashboard grid sections ******************************************************************************/

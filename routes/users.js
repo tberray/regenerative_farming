@@ -91,6 +91,10 @@ module.exports = (params) => {
 		res.render("confirmation-page");
 	});
 
+	router.get("/terms-info", isAuthenticated, (req, res)=> {
+		res.render("terms-info");
+	});
+
 	router.get("/field-input", checkNotAuthenticated, (req, res)=> {
 		res.render("field-input");
 	});

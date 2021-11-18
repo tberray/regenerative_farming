@@ -18,7 +18,12 @@
   border: solid 1px rgb(0, 0, 0);
 }
 .sidebar.close{
-  width: 78px;  /* for all body content put margin-left 78px to account for sidenav if the sidenav blocks stuff */
+  width: 40px;  /* for all body content put margin-left 78px to account for sidenav if the sidenav blocks stuff */
+}
+@media only screen and (min-width: 640px) {
+  .sidebar.close{
+    width: 78px;  /* for all body content put margin-left 78px to account for sidenav if the sidenav blocks stuff */
+  }
 }
 .sidebar .logo-details{
   height: 60px;
@@ -30,9 +35,19 @@
   font-size: 30px;
   color: rgb(0, 0, 0);
   height: 50px;
-  min-width: 78px;
+  min-width: 40px;
   text-align: center;
   line-height: 50px;
+}
+@media only screen and (min-width: 640px) {
+  .sidebar .logo-details i{
+    font-size: 30px;
+    color: rgb(0, 0, 0);
+    height: 50px;
+    min-width: 78px;
+    text-align: center;
+    line-height: 50px;
+  }
 }
 .sidebar .logo-details .logo_name{
   font-size: 22px;
@@ -76,13 +91,25 @@
 }
 .sidebar .nav-links li i{
   height: 50px;
-  min-width: 78px;
+  min-width: 40px;
   text-align: center;
   line-height: 50px;
   color: rgb(0, 0, 0);
   font-size: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+@media only screen and (min-width: 640px) {
+  .sidebar .nav-links li i{
+    height: 50px;
+    min-width: 78px;
+    text-align: center;
+    line-height: 50px;
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
 }
 .sidebar .nav-links li.showMenu i.arrow{
   transform: rotate(-180deg);
