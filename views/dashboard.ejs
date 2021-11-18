@@ -5,10 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <!--link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css"
-    /-->
+    <link rel="stylesheet" href="/css/style.css">
     <title>Document</title>
 </head>
 <body>
@@ -19,8 +16,15 @@
     <!-- navbar -->
     <%- include('partials/navbar') %>
     <!--navbar end-->
+    <%- include('partials/sidenav') %>
 
-    <h1>Hello <%= user.charAt(0).toUpperCase() + user.slice(1) %></h1>
+    <div class="content">
+        <div class="mx-auto pt-5" style="width: 300px;">
+            <h1>Hello <%= user.charAt(0).toUpperCase() + user.slice(1) %></h1><br>
+            <a href="/users/downloadCSV">Click to download CSV</a><br>
+            <a href="/users/downloadExcel">Click to download Excel</a>
+        </div>
+    </div>
 
 </body>
 </html>

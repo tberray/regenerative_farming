@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="http://localhost:4000/css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -13,226 +13,229 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
-});
+            $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+        });
     </script>
 
 
     <!-- navbar -->
     <%- include('partials/navbar') %>
     <!--navbar end-->
+    <%- include('partials/sidenav') %>
 
-    <!--title and instructions-->
-    <div class="pt-5 mx-auto" style="width: 1200px;">
-        <h3>Soil Data Input</h3>
-        
-        <p>Pick the field you would like to enter data for and enter the corresponding data.</p>
-        <p>If you do not know the data associated with a label, you can leave it blank.
-            Hover over the [?] for helpful tips.
-        </p>
-        <a href="/users/field-input">Click to add a new field</a>
-        <% if (messages.message) { %>
-            <p><%= messages.message %></p>
-        <% } %>
-    </div>
-    <br>
-
-
-    <!--title and instructions end-->
-
-    <!--form-->
-    <div class="container">
-    <form action="/users/datainput" method="POST">
-
-        <!--Field-->
-        <div class="row">
-            <div class="label-column">
-                <label for="field" class="form-labels">Field</label>
-            </div>
-            <div class="input-column">
-                <select id="field" class="form-inputs" name="field">
-                    <% if (typeof(fields) !== undefined) { %>
-                    <% for (let field of fields) { %>
-                    <option value="<%= field.id %>"><%= field.address %></option>
-                    <% } %>
-                    <% } %>
-                    </select>
-            </div>
-
-            <!--We can use either p or a href depending on if we add links-->
-            <p data-toggle="tooltip" title="Pick the field you want to enter data for">[?]</p>
-            <!--a href="#" data-toggle="tooltip" title="Title Here">Hyperlink Text</a-->
+    <div class="content">
+        <!--title and instructions-->
+        <div class="pt-5 mx-auto" style="width: 1200px;">
+            <h3>Soil Data Input</h3>
             
-        </div>
-        <!--a href="#" data-toggle="tooltip" title="Title Here">Hyperlink Text</a-->
-
-        <!--pH-->
-        <div class="row">
-            <div class="label-column">
-                <label for="ph" class="form-labels">pH</label>
-            </div>
-            <div class="input-column">
-                <input type="number" class="form-inputs" step=0.01 min=0 max=20 id="ph" name="ph" placeholder="pH">
-            </div>
-            <p data-toggle="tooltip" title="pH measures the acidity level of the soil (should be around 6-8)">[?]</p>
-        </div>
-        
-        <!--N-->
-        <div class="row">
-            <div class="label-column">
-                <label for="nitrogen" class="form-labels">Nitrogen</label>
-            </div>
-            <div class="input-column">
-                <input type="number" class="form-inputs" step=1 min=0 max=500 id="nitrogen" name="nitrogen" placeholder="Nitrogen in ppm">
-            </div>
-            <p data-toggle="tooltip" title="level of nitrates in the soil in parts per million">[?]</p>
-        </div>
-
-        <!--P-->
-        <div class="row">
-            <div class="label-column">
-                <label for="phosphorus" class="form-labels">Phosphorus</label>
-            </div>
-            <div class="input-column">
-                <input type="number" class="form-inputs" step=1 min=0 max=500 id="phosphorus" name="phosphorus" placeholder="Phosphorus in ppm">
-            </div>
-            <p data-toggle="tooltip" title="level of phosphorus in the soil in parts per million">[?]</p>
-        </div>
-
-        <!--K-->
-        <div class="row">
-            <div class="label-column">
-                <label for="potassium" class="form-labels">Potassium</label>
-            </div>
-            <div class="input-column">
-                <input type="number" class="form-inputs" step=1 min=0 max=500 id="potassium" name="potassium" placeholder="Potassium in ppm">
-            </div>
-            <p data-toggle="tooltip" title="level of potassium in the soil in parts per million">[?]</p>
-        </div>
-
-        <!--temp-->
-        <!-- <div class="row">
-            <div class="label-column">
-                <label for="temperature" class="form-labels">Temperature</label>
-            </div>
-            <div class="input-column">
-                <input type="number" class="form-inputs2" step=.1 min=-100 max=160 id="temperature" name="temperature" placeholder="Temperature">
-            </div>
-            <div class="third-column">
-                <select id="forc" class="form-third" name="forc">
-                    <option value="celsius">Celsius</option>
-                    <option value="fahrenheit">Fahrenheit</option>
-                    </select>
-            </div>
-            <p data-toggle="tooltip" title="temperature in either C or F">[?]</p>
-        </div> -->
-
-        <!--co2-->
-        <!-- can use for Soil Respiration (lb CO2 -C/acre/day) = PF x TF x (%CO2 - 0.035) x 22.91 x H-->
-        <div class="row">
-            <div class="label-column">
-                <label for="co2" class="form-labels">Percent CO2</label>
-            </div>
-            <div class="input-column">
-                <input type="number" class="form-inputs" step=.1 min=0 max=100 id="co2" name="co2" placeholder="CO2 Percentage">
-            </div>
-            <p data-toggle="tooltip" title="To measure CO2 in soil you must...">[?]</p>
-        </div>
-
-        <!--infiltration-->
-        <div class="row">
-            <div class="label-column">
-                <label for="infiltration" class="form-labels">Infiltration</label>
-            </div>
-            <div class="input-column">
-                <input type="number" class="form-inputs" step=.1 min=0 id="infiltration" name="infiltration" placeholder="Infiltration in mm/hr">
-            </div>
-            
-            <p data-toggle="tooltip" title="(depth of water layer that can enter the soil in one hour)">[?]</p>
-        </div>
-
-        <!--bulk density-->
-        <div class="row">
-            <div class="label-column">
-                <label for="bulk-density" class="form-labels">Bulk Density</label>
-            </div>
-            <div class="input-column">
-                <input type="number" class="form-inputs" step=.1 min=0 id="bulk-density" name="bulkDensity" placeholder="Bulk Density in g/cm^3">
-            </div>
-            
-            <p data-toggle="tooltip" title="(weight of soil per volume)">[?]</p>
-        </div>
-        
-        <!--Electrical conductivity-->
-        <div class="row">
-            <div class="label-column">
-                <label for="conductivity" class="form-labels">Electrical Conductivity</label>
-            </div>
-            <div class="input-column">
-                <input type="number" class="form-inputs" step=.1 min=0 id="conductivity" name="conductivity" placeholder="Electrical Conductivity in dS/m">
-            </div>
-            <p data-toggle="tooltip" title="(how well current travels through soil water)">[?]</p>
-        </div>
-
-        <!--Aggregate Stability-->
-        <div class="row">
-            <div class="label-column">
-                <label for="stability" class="form-labels">Aggregate Stability</label>
-            </div>
-            <div class="input-column">
-                <input type="number" class="form-inputs" step=.1 min=0 id="stability" name="stability" placeholder="Aggregate Stability in % of soil > 0.25mm">
-            </div>
-            <p 
-                data-toggle="tooltip" 
-                title="measures the ability of the soil to resist disintegration when shaken and immersed in water. 
-                Indicates how well rainwater and irrigation can infiltrate the soil and how easy it is to wash off or blow the soil away. 
-                Calculated based on the weight of soil remaining on the screen in relation to the amount of soil that passes through the screen">
-                [?]
+            <p>Pick the field you would like to enter data for and enter the corresponding data.</p>
+            <p>If you do not know the data associated with a label, you can leave it blank.
+                Hover over the [?] for helpful tips.
             </p>
+            <a href="/users/field-input">Click to add a new field</a>
+            <% if (messages.message) { %>
+                <p><%= messages.message %></p>
+            <% } %>
         </div>
+        <br>
 
-        <!--Slaking-->
-        <div class="row">
-            <div class="label-column">
-                <label for="slaking" class="form-labels">Slaking</label>
+
+        <!--title and instructions end-->
+
+        <!--form-->
+        <div class="container">
+        <form action="/users/datainput" method="POST">
+
+            <!--Field-->
+            <div class="row">
+                <div class="label-column">
+                    <label for="field" class="form-labels">Field</label>
+                </div>
+                <div class="input-column">
+                    <select id="field" class="form-inputs" name="field">
+                        <% if (typeof(fields) !== undefined) { %>
+                        <% for (let field of fields) { %>
+                        <option value="<%= field.id %>"><%= field.address %></option>
+                        <% } %>
+                        <% } %>
+                        </select>
+                </div>
+
+                <!--We can use either p or a href depending on if we add links-->
+                <p data-toggle="tooltip" title="Pick the field you want to enter data for">[?]</p>
+                <!--a href="#" data-toggle="tooltip" title="Title Here">Hyperlink Text</a-->
+                
             </div>
-            <div class="input-column">
-                <input type="number" class="form-inputs" step=.1 min=0 id="slaking" name="slaking" placeholder="Slaking in seconds">
+            <!--a href="#" data-toggle="tooltip" title="Title Here">Hyperlink Text</a-->
+
+            <!--pH-->
+            <div class="row">
+                <div class="label-column">
+                    <label for="ph" class="form-labels">pH</label>
+                </div>
+                <div class="input-column">
+                    <input type="number" class="form-inputs" step=0.01 min=0 max=20 id="ph" name="ph" placeholder="pH">
+                </div>
+                <p data-toggle="tooltip" title="pH measures the acidity level of the soil (should be around 6-8)">[?]</p>
             </div>
-            <p data-toggle="tooltip" title="measures how fast soil disperses in water.">[?]</p>
+            
+            <!--N-->
+            <div class="row">
+                <div class="label-column">
+                    <label for="nitrogen" class="form-labels">Nitrogen</label>
+                </div>
+                <div class="input-column">
+                    <input type="number" class="form-inputs" step=1 min=0 max=500 id="nitrogen" name="nitrogen" placeholder="Nitrogen in ppm">
+                </div>
+                <p data-toggle="tooltip" title="level of nitrates in the soil in parts per million">[?]</p>
+            </div>
+
+            <!--P-->
+            <div class="row">
+                <div class="label-column">
+                    <label for="phosphorus" class="form-labels">Phosphorus</label>
+                </div>
+                <div class="input-column">
+                    <input type="number" class="form-inputs" step=1 min=0 max=500 id="phosphorus" name="phosphorus" placeholder="Phosphorus in ppm">
+                </div>
+                <p data-toggle="tooltip" title="level of phosphorus in the soil in parts per million">[?]</p>
+            </div>
+
+            <!--K-->
+            <div class="row">
+                <div class="label-column">
+                    <label for="potassium" class="form-labels">Potassium</label>
+                </div>
+                <div class="input-column">
+                    <input type="number" class="form-inputs" step=1 min=0 max=500 id="potassium" name="potassium" placeholder="Potassium in ppm">
+                </div>
+                <p data-toggle="tooltip" title="level of potassium in the soil in parts per million">[?]</p>
+            </div>
+
+            <!--temp-->
+            <!-- <div class="row">
+                <div class="label-column">
+                    <label for="temperature" class="form-labels">Temperature</label>
+                </div>
+                <div class="input-column">
+                    <input type="number" class="form-inputs2" step=.1 min=-100 max=160 id="temperature" name="temperature" placeholder="Temperature">
+                </div>
+                <div class="third-column">
+                    <select id="forc" class="form-third" name="forc">
+                        <option value="celsius">Celsius</option>
+                        <option value="fahrenheit">Fahrenheit</option>
+                        </select>
+                </div>
+                <p data-toggle="tooltip" title="temperature in either C or F">[?]</p>
+            </div> -->
+
+            <!--co2-->
+            <!-- can use for Soil Respiration (lb CO2 -C/acre/day) = PF x TF x (%CO2 - 0.035) x 22.91 x H-->
+            <div class="row">
+                <div class="label-column">
+                    <label for="co2" class="form-labels">Percent CO2</label>
+                </div>
+                <div class="input-column">
+                    <input type="number" class="form-inputs" step=.1 min=0 max=100 id="co2" name="co2" placeholder="CO2 Percentage">
+                </div>
+                <p data-toggle="tooltip" title="To measure CO2 in soil you must...">[?]</p>
+            </div>
+
+            <!--infiltration-->
+            <div class="row">
+                <div class="label-column">
+                    <label for="infiltration" class="form-labels">Infiltration</label>
+                </div>
+                <div class="input-column">
+                    <input type="number" class="form-inputs" step=.1 min=0 id="infiltration" name="infiltration" placeholder="Infiltration in mm/hr">
+                </div>
+                
+                <p data-toggle="tooltip" title="(depth of water layer that can enter the soil in one hour)">[?]</p>
+            </div>
+
+            <!--bulk density-->
+            <div class="row">
+                <div class="label-column">
+                    <label for="bulk-density" class="form-labels">Bulk Density</label>
+                </div>
+                <div class="input-column">
+                    <input type="number" class="form-inputs" step=.1 min=0 id="bulk-density" name="bulkDensity" placeholder="Bulk Density in g/cm^3">
+                </div>
+                
+                <p data-toggle="tooltip" title="(weight of soil per volume)">[?]</p>
+            </div>
+            
+            <!--Electrical conductivity-->
+            <div class="row">
+                <div class="label-column">
+                    <label for="conductivity" class="form-labels">Electrical Conductivity</label>
+                </div>
+                <div class="input-column">
+                    <input type="number" class="form-inputs" step=.1 min=0 id="conductivity" name="conductivity" placeholder="Electrical Conductivity in dS/m">
+                </div>
+                <p data-toggle="tooltip" title="(how well current travels through soil water)">[?]</p>
+            </div>
+
+            <!--Aggregate Stability-->
+            <div class="row">
+                <div class="label-column">
+                    <label for="stability" class="form-labels">Aggregate Stability</label>
+                </div>
+                <div class="input-column">
+                    <input type="number" class="form-inputs" step=.1 min=0 id="stability" name="stability" placeholder="Aggregate Stability in % of soil > 0.25mm">
+                </div>
+                <p 
+                    data-toggle="tooltip" 
+                    title="measures the ability of the soil to resist disintegration when shaken and immersed in water. 
+                    Indicates how well rainwater and irrigation can infiltrate the soil and how easy it is to wash off or blow the soil away. 
+                    Calculated based on the weight of soil remaining on the screen in relation to the amount of soil that passes through the screen">
+                    [?]
+                </p>
+            </div>
+
+            <!--Slaking-->
+            <div class="row">
+                <div class="label-column">
+                    <label for="slaking" class="form-labels">Slaking</label>
+                </div>
+                <div class="input-column">
+                    <input type="number" class="form-inputs" step=.1 min=0 id="slaking" name="slaking" placeholder="Slaking in seconds">
+                </div>
+                <p data-toggle="tooltip" title="measures how fast soil disperses in water.">[?]</p>
+            </div>
+
+            <!--Earthworms-->
+            <div class="row">
+                <div class="label-column">
+                    <label for="earthworms" class="form-labels">Earthworm Count</label>
+                </div>
+                <div class="input-column">
+                    <input type="number" class="form-inputs" step=1 min=0 id="earthworms" name="earthworms" placeholder="Number of earthworms per ft^2">
+                </div>
+                <p data-toggle="tooltip" title="worms">[?]</p>
+            </div>
+
+            <!--Penetration Resistance-->
+            <div class="row">
+                <div class="label-column">
+                    <label for="penetration-resist" class="form-labels">Penetration Resistance</label>
+                </div>
+                <div class="input-column">
+                    <input type="number" class="form-inputs" step=.1 min=0 id="penetration-resist" name="penetrationResist" placeholder="Penetration Resistance in kPa">
+                </div>
+                <p data-toggle="tooltip" title="measures force required to insert a metal rod into soil">[?]</p>
+            </div>
+            
+
+            <!--button-->
+            <div class="pt-1">
+                <input type="submit" class="btn btn-success form-button" value="Submit" />
+            </div>
+        </form>
+
         </div>
-
-        <!--Earthworms-->
-        <div class="row">
-            <div class="label-column">
-                <label for="earthworms" class="form-labels">Earthworm Count</label>
-            </div>
-            <div class="input-column">
-                <input type="number" class="form-inputs" step=1 min=0 id="earthworms" name="earthworms" placeholder="Number of earthworms per ft^2">
-            </div>
-            <p data-toggle="tooltip" title="worms">[?]</p>
-        </div>
-
-        <!--Penetration Resistance-->
-        <div class="row">
-            <div class="label-column">
-                <label for="penetration-resist" class="form-labels">Penetration Resistance</label>
-            </div>
-            <div class="input-column">
-                <input type="number" class="form-inputs" step=.1 min=0 id="penetration-resist" name="penetrationResist" placeholder="Penetration Resistance in kPa">
-            </div>
-            <p data-toggle="tooltip" title="measures force required to insert a metal rod into soil">[?]</p>
-        </div>
-        
-
-        <!--button-->
-        <div class="pt-1">
-            <input type="submit" class="btn btn-success form-button" value="Submit" />
-        </div>
-    </form>
-
-    </div>
-    <!--form end-->
+        <!--form end-->
+    </div> <!--content container end-->
 
 
 </body>
