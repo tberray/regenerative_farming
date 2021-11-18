@@ -20,7 +20,9 @@
     <%- include('partials/navbar') %>
     <!--navbar end-->
 
-    <h1>Hello <%= user.charAt(0).toUpperCase() + user.slice(1) %></h1>
+    <h1>Hello <%= user.charAt(0).toUpperCase() + user.slice(1) %></h1><br>
 
+    <a href="/users/downloadCSV">Click to download CSV</a><br>
+    <a href="/users/downloadExcel">Click to download Excel</a>
 </body>
 </html>
