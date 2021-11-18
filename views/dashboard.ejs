@@ -17,8 +17,10 @@
     <%- include('partials/navbar') %>
     <!--navbar end-->
     <%- include('partials/sidenav') %>
-    <div class="mx-auto pt-5 content" style="width: 300px;">
-        <h1>Hello <%= user.charAt(0).toUpperCase() + user.slice(1) %></h1>
+    <div class="mx-auto pt-5" style="width: 300px;">
+        <h1>Hello <%= user.charAt(0).toUpperCase() + user.slice(1) %></h1><br>
+        <a href="/users/downloadCSV">Click to download CSV</a><br>
+        <a href="/users/downloadExcel">Click to download Excel</a>
     </div>
 
 </body>
