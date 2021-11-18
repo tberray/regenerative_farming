@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "tbanken",
-    "password": "candid23",
-    "database": "regenapp",
+    "username": "tyler",
+    "password": "password",
+    "database": "regenApp",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },

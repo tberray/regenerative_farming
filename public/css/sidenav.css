@@ -8,16 +8,17 @@
 }
 .sidebar{
   position: fixed;
-  top: 73px;
+  top: 74px;
   left: 0;
   height: 100%;
   width: 260px;
-  background: #11101d;
+  background: #d1ffce;
   z-index: 100;
   transition: all 0.5s ease;
+  border: solid 1px rgb(0, 0, 0);
 }
 .sidebar.close{
-  width: 78px;
+  width: 78px;  /* for all body content put margin-left 78px to account for sidenav if the sidenav blocks stuff */
 }
 .sidebar .logo-details{
   height: 60px;
@@ -27,7 +28,7 @@
 }
 .sidebar .logo-details i{
   font-size: 30px;
-  color: #fff;
+  color: rgb(0, 0, 0);
   height: 50px;
   min-width: 78px;
   text-align: center;
@@ -35,7 +36,7 @@
 }
 .sidebar .logo-details .logo_name{
   font-size: 22px;
-  color: #fff;
+  color: rgb(0, 0, 0);
   font-weight: 600;
   transition: 0.3s ease;
   transition-delay: 0.1s;
@@ -62,8 +63,9 @@
   transition: all 0.4s ease;
 }
 .sidebar .nav-links li:hover{
-  background: #1d1b31;
+  background: #b3ffae;
 }
+
 .sidebar .nav-links li .iocn-link{
   display: flex;
   align-items: center;
@@ -77,7 +79,7 @@
   min-width: 78px;
   text-align: center;
   line-height: 50px;
-  color: #fff;
+  color: rgb(0, 0, 0);
   font-size: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -96,7 +98,7 @@
 .sidebar .nav-links li a .link_name{
   font-size: 18px;
   font-weight: 400;
-  color: #fff;
+  color: rgb(0, 0, 0);
   transition: all 0.4s ease;
 }
 .sidebar.close .nav-links li a .link_name{
@@ -106,14 +108,14 @@
 .sidebar .nav-links li .sub-menu{
   padding: 6px 6px 14px 80px;
   margin-top: -10px;
-  background: #1d1b31;
+  background: #d1ffce;
   display: none;
 }
 .sidebar .nav-links li.showMenu .sub-menu{
   display: block;
 }
 .sidebar .nav-links li .sub-menu a{
-  color: #fff;
+  color: rgb(0, 0, 0);
   font-size: 15px;
   padding: 5px 0;
   white-space: nowrap;
@@ -167,7 +169,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #1d1b31;
+  background: #000000;
   padding: 12px 0;
   transition: all 0.5s ease;
 }
@@ -187,7 +189,7 @@
   object-fit: cover;
   border-radius: 16px;
   margin: 0 14px 0 12px;
-  background: #1d1b31;
+  background: #000000;
   transition: all 0.5s ease;
 }
 .sidebar.close .profile-details img{
@@ -195,7 +197,7 @@
 }
 .sidebar .profile-details .profile_name,
 .sidebar .profile-details .job{
-  color: #fff;
+  color: rgb(0, 0, 0);
   font-size: 18px;
   font-weight: 500;
   white-space: nowrap;
@@ -227,7 +229,7 @@
 }
 .home-section .home-content .bx-menu,
 .home-section .home-content .text{
-  color: #11101d;
+  color: #000000;
   font-size: 35px;
 }
 .home-section .home-content .bx-menu{
@@ -244,80 +246,6 @@
   }
 }
 
+
 /*************************************************************************/
 
-body {
-    background-color: #b3ffae;
-}
-
-.login-form {
-    margin-left: -100px;
-}
-
-.login-form-errors {
-    margin-left: -100px;
-    color: red;
-}
-
-
-.bottom-form {
-    margin-bottom: 5px;
-}
-
-.register-form {
-    margin-left: -65px;
-}
-
-.register-text {
-    margin-left: 115px;
-}
-
-.form-labels {
-    width: 150px;
-}
-
-.form-inputs {
-    width: 400px;
-}
-.form-inputs2 {
-    width: 280px;
-}
-.form-third {
-    width: 120px;
-}
-
-.form-button {
-    width: 500px;
-}
-
-.about-paragraph {
-    width: 700px;
-
-}
-
-.tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black;
-  }
-  
-  .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-    top: 100%;
-    left: 50%;
-    margin-left: -60px;
-  }
-  
-  .tooltip:hover .tooltiptext {
-    visibility: visible;
-  }
