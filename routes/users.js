@@ -4,7 +4,10 @@ const XLSX = require('xlsx')
 const router = express.Router();
 const fs = require('fs');
 const ObjectsToCsv = require('objects-to-csv');
-let soilDataJSON = [];
+let soilDataJSON = [{"FieldId":"", "pH":"", "nitrate":"", "phosphorus":"", 
+	"potassium":"", "tempterature":"", "pctCo2":"", "infiltration":"", 
+	"blkDensity":"", "conductivity":"", "aggStability":"", "slakingRating":"", 
+	"earthwormCount":"", "penResistance": ""}];
 
 module.exports = (params) => {
 	const {checkNotAuthenticated, checkAuthenticated, isAuthenticated, pool, passport, bcrypt} = params;
