@@ -112,6 +112,10 @@ module.exports = (params) => {
 		res.render("field-input");
 	});
 
+	router.get("/enter-data", checkNotAuthenticated, (req, res)=> {
+		res.render("enter-data");
+	});
+
 	router.post("/field-input",(req, res) =>{
 		var user_id = req.user.id;
 		let {fieldname, address, acreage} = req.body;

@@ -4,6 +4,8 @@ body {
 }
 
 .content {
+    display: flex;
+    flex-direction: column;
     margin-left: 78px;
     margin-top: 78px;
 }
@@ -104,6 +106,67 @@ body {
 
 .terms-ul {
     margin-left: 55px;
+}
+
+.about-page-picture {
+    position: absolute;
+    height: 250px;
+    width: 400px;
+    top: 300px;
+    left: 880px;
+    border-radius: 10%;
+    visibility: hidden;
+}
+@media only screen and (min-width: 1300px) {
+    .about-page-picture {
+        visibility: visible;
+    }
+}
+
+
+.mke-circle {
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    top: 40px;
+    left: 40%;
+    margin-left: -40px;
+    visibility: visible;
+}
+@media only screen and (min-width: 640px) {
+    .mke-circle {
+
+
+        left: 43%;
+
+    }
+}
+@media only screen and (min-width: 900px) {
+    .mke-circle {
+        left: 45%;
+
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .mke-circle {
+        left: 47%;
+
+    }
+}
+@media only screen and (min-width: 760px) {
+    .mke-circle {
+        z-index: -1;
+    }
+}
+@media only screen and (min-width: 1000px) {
+    .mke-circle {
+        visibility: visible;
+        z-index: 0;
+    }
+}
+
+.mke-circle-register {
+    margin-left: -20px;
 }
 
 /************************** dashboard grid sections ******************************************************************************/
