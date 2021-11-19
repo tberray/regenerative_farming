@@ -95,6 +95,17 @@ body {
     text-align: right;
 }
 
+.anchor {
+    display: block;
+    position: relative;
+    top: -40px;
+    visibility: hidden;
+}
+
+.terms-ul {
+    margin-left: 55px;
+}
+
 /************************** dashboard grid sections ******************************************************************************/
 
 .dashboard-parent { /* used to contain all the stuff on the dashboard */
