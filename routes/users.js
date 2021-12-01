@@ -25,7 +25,17 @@ module.exports = (params) => {
 	});
 	
 	router.get("/dashboard", checkNotAuthenticated, (req, res)=> {
-		res.render("dashboard", {user: req.user.name });
+		//res.render("dashboard", {user: req.user.name });
+		models.Field.findAll({where: {UserId:req.user.id}}).catch(error =>{
+			if(error) {
+				throw error;
+			}
+		}).then((fields) => {
+			res.render("dashboard", {
+				"fields": fields, // placeholder
+				user: req.user.name
+			});
+		});
 	});
 
 	router.get("/datainput", checkNotAuthenticated, (req, res)=> {
@@ -97,7 +107,17 @@ module.exports = (params) => {
 
 	// not needed but you can use if you want to test something
 	router.get("/test", isAuthenticated, (req, res)=> {
-		res.render("test");
+		//res.render("test", {user: req.user.name });
+		models.Field.findAll({where: {UserId:req.user.id}}).catch(error =>{
+			if(error) {
+				throw error;
+			}
+		}).then((fields) => {
+			res.render("test", {
+				"fields": fields, // placeholder
+				user: req.user.name
+			});
+		});
 	});
 
 	router.get("/confirmation-page", isAuthenticated, (req, res)=> {

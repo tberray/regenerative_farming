@@ -26,12 +26,28 @@
     <div class="content">
       <div class="dashboard-parent">
         <section>
-          afdls;kajfkld;sjl dfjskl afjd af ds j;l djaf ds d fsfjs fljas fd fds aldf d df sad ;fkl adsd f fsdsd fjlsd fl
-          <div class="rectangle"></div>
-          <div class="rectangle"></div>
+          <h1><%= user.charAt(0).toUpperCase() + user.slice(1) %>'s Dashboard</h1><br>
+
         </section>
         <section>
-          eirow r uiewe ruioe ruioeiow rweuio roee ruioe rwe uio re ruio uioerw uioe ruioer uoe e ruioe ruio
+          
+          <h2>My Fields:</h2>
+          <table class="fieldTable">
+            <tr>
+              <th>Address</th>
+              <th>Acreage</th>
+            </tr>
+            <tr>
+              <% if (typeof(fields) !== undefined) { %>
+                <% for (let field of fields) { %>
+                <tr>
+                  <td> <%= field.address %></td>
+                  <td> <%= field.size %> </td>
+                </tr>
+                <% } %>
+              
+              <% } %>
+          </table>
         </section>
         <section>
           cmxvc vcvxc   m,.cv ,.xcv m,.xcvc v .,xcv ,.cv ,.v .,v m.xcv m,.xcv ,.xcv .,cv m,.cv m,.xc ,.v c,. n.zxcnxc nczx n.zxc
