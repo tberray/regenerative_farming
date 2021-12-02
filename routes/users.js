@@ -118,14 +118,23 @@ module.exports = (params) => {
 
 	router.post("/field-input",(req, res) =>{
 		var user_id = req.user.id;
-		let {fieldname, address, acreage} = req.body;
-		if (isNaN(Number(acreage))) {
-			req.flash("errors", "Error: acreage must be a number");
+		let {address, acreage} = req.body;
+		
+		if (acreage === "" || address === "") {
+			var errors = [];
+			if(acreage === "") {
+				errors.push("Error: acreage must not be empty")
+			}
+			if(address === "") {
+				errors.push("Error: address must not be empty")
+			}
+			req.flash("errors", errors);
 			res.render("field-input");
+		} else {
+			req.flash("message", "Success!");
+			models.Field.create({UserId:user_id, address:address,size:acreage});
+			res.redirect("/users/datainput");
 		}
-		req.flash("message", "Success!");
-		models.Field.create({UserId:user_id, address:address,size:acreage});
-		res.redirect("/users/datainput");
 	});
 	
 	router.get("/logout", (req, res)=>{
