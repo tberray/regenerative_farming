@@ -21,79 +21,44 @@
     <!--navbar end-->
 
     <!--go to https://boxicons.com to find icons and click where it says fonts for the <i class=''></i> (icon)-->
-    <div class="sidebar close">
-      <div class="logo-details">
-        <i class='bx bx-menu menu-button' ></i>
+    <%- include('partials/sidenav') %>
+
+    <div class="content">
+      <div class="dashboard-parent">
+        <section>
+          <h1><%= user.charAt(0).toUpperCase() + user.slice(1) %>'s Dashboard</h1><br>
+
+        </section>
+        <section>
+          
+          <h2>My Fields:</h2>
+          <table class="fieldTable">
+            <tr>
+              <th>Address</th>
+              <th>Acreage</th>
+            </tr>
+            <tr>
+              <% if (typeof(fields) !== undefined) { %>
+                <% for (let field of fields) { %>
+                <tr>
+                  <td> <%= field.address %></td>
+                  <td> <%= field.size %> </td>
+                </tr>
+                <% } %>
+              
+              <% } %>
+          </table>
+        </section>
+        <section>
+          cmxvc vcvxc   m,.cv ,.xcv m,.xcvc v .,xcv ,.cv ,.v .,v m.xcv m,.xcv ,.xcv .,cv m,.cv m,.xc ,.v c,. n.zxcnxc nczx n.zxc
+        </section>
+        <section>
+           rghpguorio j gjioj avpjoav jiov nvaaj vc vjn pdvk mk dpaad pkoad pmkdad pmkd pk nvk nv pnl pnklad pmklawd mkld mkl
+        </section>
       </div>
-      <ul class="nav-links">
-        <li>
-          <a href="#">
-            <i class='bx bx-home'></i>
-            <span class="link_name">Dashboard</span>
-          </a>
-          <ul class="sub-menu blank">
-            <li><a class="link_name" href="#">Dashboard</a></li>
-          </ul>
-        </li>
-
-        <li>
-          <div class="iocn-link">
-            <a href="#">
-              <i class='bx bx-data' ></i>
-              <span class="link_name">Enter Data</span>
-            </a>
-            <i class='bx bxs-chevron-down arrow' ></i>
-          </div>
-          <ul class="sub-menu">
-            <li><a class="link_name" href="#">Enter Data</a></li>
-            <li><a href="#">Create Field</a></li>
-            <li><a href="#">Enter Data for Field</a></li>
-            
-          </ul>
-        </li>
-
-        <li>
-          <a href="#">
-            <i class='bx bx-cog' ></i>
-            <span class="link_name">Settings</span>
-          </a>
-          <ul class="sub-menu blank">
-            <li><a class="link_name" href="#">Settings</a></li>
-          </ul>
-        </li>
-        
-      </ul>
-    </div>
-    <!--section class="home-section">
-      <div class="home-content">
-        <--include home content-->
-      <!--/div-->
-    <!--/section-->
-
-    <div class="about-paragraph pt-5 mx-auto">
-      <h6>About Regenerative Farming</h6>
-    </div>
-    <div class="about-paragraph mx-auto">
-      <p>Regenerative Farming is a type of farming that replenishes soil as it is being used and encompasses a wide variety of things. 
-          It focuses on bringing nutrients and biodiversity back into the soil by the use of cover crops, grazing animals, and no-till practices.
-      </p>
     </div>
 
-    <script>
-    let arrow = document.querySelectorAll(".arrow");
-    for (var i = 0; i < arrow.length; i++) {
-      arrow[i].addEventListener("click", (e)=>{
-        let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
-        arrowParent.classList.toggle("showMenu");
-      });
-    }
-    let sidebar = document.querySelector(".sidebar");
-    let sidebarBtn = document.querySelector(".bx-menu");
-    console.log(sidebarBtn);
-    sidebarBtn.addEventListener("click", ()=>{
-      sidebar.classList.toggle("close");
-    });
-    </script>
+    
 
 </body>
 </html>

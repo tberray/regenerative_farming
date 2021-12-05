@@ -23,66 +23,68 @@
     <!--navbar end-->
     <%- include('partials/sidenav') %>
 
-    <!--title and instructions-->
-    <div class="pt-5 mx-auto" style="width: 1200px;">
-        <h3>Field Creator</h3>
-        
-        <p>Create a field by entering the following data.</p>
-        <p>Hover over the [?]s for tips.</p>
-    </div>
-    <br>
-
-    <!--title and instructions end-->
-
-    
-
-    <!--form-->
-    <div class="container">
-        <form action="/users/field-input" method="POST">
-    
-        <!--field name-->
-        <!-- <div class="row">
-            <div class="label-column">
-                <label for="field-name" class="form-labels">Field Name</label>
-            </div>
-            <div class="input-column">
-                <input type="text" class="form-inputs"  id="fieldname" name="fieldname" placeholder="fieldname">
-            </div>
-            <p data-toggle="tooltip" title="Pick a name for your field">[?]</p>
-        </div> -->
-        
-        <!--address-->
-        <div class="row">
-            <div class="label-column">
-                <label for="address" class="form-labels">Address</label>
-            </div>
-            <div class="input-column">
-                <input type="text" class="form-inputs"  id="address" name="address" placeholder="address">
-            </div>
-            <p data-toggle="tooltip" title="physical address where field is located">[?]</p>
-        </div>
-
-        <!--Acreage-->
-        <div class="row">
-            <div class="label-column">
-                <label for="acreage" class="form-labels">Acreage</label>
-            </div>
-            <div class="input-column">
-                <input type="number" class="form-inputs" step=1 min=0 max=500 id="acreage" name="acreage" placeholder="Acreage in acres">
-            </div>
-            <p data-toggle="tooltip" title="How big is your field/farm?">[?]</p>
-        </div>
+    <div class="content"> <!--container for all content-->
+        <!--title and instructions-->
+        <div class="pt-5 mx-auto" style="width: 1200px;">
+            <h3>Field Creator</h3>
             
-
-        <!--button-->
-        <div class="pt-1">
-            <input type="submit" class="btn btn-success form-button" value="Create Field" />
+            <p>Create a field by entering the following data.</p>
+            <p>Hover over the [?]s for tips.</p>
         </div>
+        <br>
 
-        </form>
+        <!--title and instructions end-->
 
-    </div>
-    <!--form end-->
+        
+
+        <!--form-->
+        <div class="container">
+            <form action="/users/field-input" method="POST">
+        
+            <!--field name-->
+            <!-- <div class="row">
+                <div class="label-column">
+                    <label for="field-name" class="form-labels">Field Name</label>
+                </div>
+                <div class="input-column">
+                    <input type="text" class="form-inputs"  id="fieldname" name="fieldname" placeholder="fieldname">
+                </div>
+                <p data-toggle="tooltip" title="Pick a name for your field">[?]</p>
+            </div> -->
+            
+            <!--address-->
+            <div class="row">
+                <div class="label-column">
+                    <label for="address" class="form-labels">Address</label>
+                </div>
+                <div class="input-column">
+                    <input type="text" class="form-inputs"  id="address" name="address" placeholder="address">
+                </div>
+                <p data-toggle="tooltip" title="physical address where field is located">[?]</p>
+            </div>
+
+            <!--Acreage-->
+            <div class="row">
+                <div class="label-column">
+                    <label for="acreage" class="form-labels">Acreage</label>
+                </div>
+                <div class="input-column">
+                    <input type="number" class="form-inputs" step=1 min=0 max=500 id="acreage" name="acreage" placeholder="Acreage in acres">
+                </div>
+                <p data-toggle="tooltip" title="How big is your field/farm?">[?]</p>
+            </div>
+                
+
+            <!--button-->
+            <div class="pt-1">
+                <input type="submit" class="btn btn-success form-button" value="Create Field" />
+            </div>
+
+            </form>
+
+        </div>
+        <!--form end-->
+    </div> <!--content container end-->
 
 
 </body>

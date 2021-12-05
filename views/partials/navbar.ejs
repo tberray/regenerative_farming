@@ -1,5 +1,6 @@
-<nav class="navbar navbar-expand-md navbar-light" style="background-color: #d1ffce; border: solid 1px black;">
-    <a class="navbar-brand" href="#">
+<link rel="stylesheet" href="/css/style.css">
+<nav class="navbar navbar-expand-md navbar-light" style="background-color: #d1ffce; border: solid 1px black; position: fixed; width: 100%; top:0px;">
+    <a class="navbar-brand" href="/users/dashboard">
         <img src="/images/rf.jpg" width="40" height="40" class="d-inline-block align-top rounded" alt="RF">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,22 +9,33 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+        <% if(messages.authenticated) { %>
         <li class="nav-item active">
             <a class="nav-link" href="/users/dashboard">Dashboard <span class="sr-only">(current)</span></a>
         </li>
+        <% } %>
+        <% if(!messages.authenticated) { %>
+        <li class="nav-item active">
+            <a class="nav-link" href="/users/login">Log in <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="/users/register">Register <span class="sr-only">(current)</span></a>
+        </li>
+        <% } %>
         <li class="nav-item">
             <a class="nav-link" href="/users/about">About</a>
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Get Started
+                Browse
             </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <!--div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <% if(!messages.authenticated) { %>
             <a class="dropdown-item" href="/users/login">Log in</a>
             <a class="dropdown-item" href="/users/register">Register</a>
             <% } %>
             <a class="dropdown-item" href="/users/resources">Resources</a>
+            <a class="dropdown-item" href="/users/terms-info">Soil Terms</a>
             <% if(messages.authenticated) { %>
             <a class="dropdown-item" href="/users/field-input">Field Input</a>
             <a class="dropdown-item" href="/users/datainput">Input Data</a>
@@ -31,8 +43,19 @@
             <a class="dropdown-item" href="/users/account">My Account</a>
             <a class="dropdown-item" href="/users/logout">Log out</a>
             <% } %>
+        </div-->
+
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/users/resources">Resources</a>
+            <a class="dropdown-item" href="/users/terms-info">Soil Terms</a>
         </div>
         </li>
+
+        <% if(messages.authenticated) { %>
+        <li class="nav-item active">
+            <a class="nav-link" href="/users/logout">Log out <span class="sr-only">(current)</span></a>
+        </li>
+        <% } %>
     </ul>
     </div>
 </nav>

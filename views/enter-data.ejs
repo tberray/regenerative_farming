@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/style.css">
-    <title>Document</title>
+  <title>About</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/style.css">
+  <!--link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'-->
 </head>
 <body>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -19,10 +19,11 @@
     <%- include('partials/sidenav') %>
 
     <div class="content">
-        <div class="mx-auto pt-5" style="width: 500px;">
-            <h2>Welcome to our Regenerative Farming Soil Tracking app</h2>
-            <a href="/users/login">Click to Log in</a>
-        </div>
+        <ul class="terms-ul">
+        <li><a href="/users/field-input">Enter Field</a></li>
+        <li><a href="/users/datainput">Enter Soil Data for Field</a></li>
+        </ul>
     </div>
+
 </body>
 </html>

@@ -33,45 +33,46 @@
 
     
 
+    <div class="content-no-sidenav">
+        <div class="mx-auto pt-5" style="width: 200px;">
+            <h2>Login</h2>
+        </div>
+        
+        <div class="mx-auto login-form" style="width: 200px;">
+            <!--- <ul>s are for success and failure messages defined in server.js -->
+            <ul class="login-form-nonerrors">
+                <% if(messages.success_msg) { %>
+                <li><%= messages.success_msg %></li>
+                <% } %>
+            </ul>
 
-    <div class="mx-auto pt-5" style="width: 200px;">
-        <h2>Login</h2>
-    </div>
-    
-    <div class="mx-auto login-form" style="width: 200px;">
-        <!--- <ul>s are for success and failure messages defined in server.js -->
-        <ul class="login-form-nonerrors">
-            <% if(messages.success_msg) { %>
-            <li><%= messages.success_msg %></li>
-            <% } %>
-        </ul>
+            <ul class="login-form-errors">
+                <% if(messages.error ) { %>
+                <li><%= messages.error %> </li>
+                <% } %>
+            </ul>
+        </div>
 
-        <ul class="login-form-errors">
-            <% if(messages.error ) { %>
-            <li><%= messages.error %> </li>
-            <% } %>
-        </ul>
-    </div>
+        <img class="mke-circle" src="/images/1200px-University_of_Wisconsin–Milwaukee_seal.svg.png" alt="regenerative agriculture">
 
+        <div class="mx-auto form-group" style="width: 200px;">
+            <form action="/users/login" class="login-form" method="POST">
+                <div class="pt-2 bottom-form">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required />
+                </div>
+                <div class="pt-2 bottom-form">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control"id="password" name="password" placeholder="Password" required />
+                </div>
+                <div class="pt-2 bottom-form">
+                    <input type="submit" class="btn btn-success btn-block" value="Login" />
+                </div>
 
-
-    <div class="mx-auto form-group" style="width: 200px;">
-        <form action="/users/login" class="login-form" method="POST">
-            <div class="pt-2 bottom-form">
-                <label for="email">Email address</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required />
-            </div>
-            <div class="pt-2 bottom-form">
-                <label for="password">Password</label>
-                <input type="password" class="form-control"id="password" name="password" placeholder="Password" required />
-            </div>
-            <div class="pt-2 bottom-form">
-                <input type="submit" class="btn btn-success btn-block" value="Login" />
-            </div>
-
-            <a href="/users/register" class="register-text">Register</a>
-        </form>
-    </div>
+                <a href="/users/register" class="register-text">Register</a>
+            </form>
+        </div>
+    </div> <!--end content div-->
 
 </body>
 </html>

@@ -1,7 +1,13 @@
 const express = require('express');
 const models = require('../sequelize/models/index')
-
+const XLSX = require('xlsx')
 const router = express.Router();
+const fs = require('fs');
+const ObjectsToCsv = require('objects-to-csv');
+let soilDataJSON = [{"FieldId":"", "pH":"", "nitrate":"", "phosphorus":"", 
+	"potassium":"", "tempterature":"", "pctCo2":"", "infiltration":"", 
+	"blkDensity":"", "conductivity":"", "aggStability":"", "slakingRating":"", 
+	"earthwormCount":"", "penResistance": ""}];
 
 module.exports = (params) => {
 	const {checkNotAuthenticated, checkAuthenticated, isAuthenticated, pool, passport, bcrypt} = params;
@@ -19,7 +25,17 @@ module.exports = (params) => {
 	});
 	
 	router.get("/dashboard", checkNotAuthenticated, (req, res)=> {
-		res.render("dashboard", {user: req.user.name });
+		//res.render("dashboard", {user: req.user.name });
+		models.Field.findAll({where: {UserId:req.user.id}}).catch(error =>{
+			if(error) {
+				throw error;
+			}
+		}).then((fields) => {
+			res.render("dashboard", {
+				"fields": fields, // placeholder
+				user: req.user.name
+			});
+		});
 	});
 
 	router.get("/datainput", checkNotAuthenticated, (req, res)=> {
@@ -66,8 +82,15 @@ module.exports = (params) => {
 			res.redirect("/users/datainput");
 		}
 		else {
-			models.SoilEntry.create({FieldId:i.field, pH:i.ph, nitrate:i.nitrogen, phosphorus:i.phosphorus, potassium:i.potassium, tempterature:i.temperature, pctCo2:i.co2, infiltration:i.infiltration, blkDensity:i.bulkDensity, conductivity:i.conductivity, aggStability:i.stability, slakingRating:i.slaking, earthwormCount:i.earthworms, penResistance:i.penetrationResist});
-
+			models.SoilEntry.create({FieldId:i.field, pH:i.ph, nitrate:i.nitrogen, phosphorus:i.phosphorus, 
+				potassium:i.potassium, tempterature:i.temperature, pctCo2:i.co2, infiltration:i.infiltration, 
+				blkDensity:i.bulkDensity, conductivity:i.conductivity, aggStability:i.stability, slakingRating:i.slaking, 
+				earthwormCount:i.earthworms, penResistance:i.penetrationResist});
+			
+			soilDataJSON = [{FieldId:i.field, pH:i.ph, nitrate:i.nitrogen, phosphorus:i.phosphorus, 
+				potassium:i.potassium, tempterature:i.temperature, pctCo2:i.co2, infiltration:i.infiltration, 
+				blkDensity:i.bulkDensity, conductivity:i.conductivity, aggStability:i.stability, slakingRating:i.slaking, 
+				earthwormCount:i.earthworms, penResistance:i.penetrationResist}];
 			req.flash("message", "Success!");
 
 			res.redirect("/users/datainput"); // temporary
@@ -82,24 +105,56 @@ module.exports = (params) => {
 		res.render("about");
 	});
 
-	router.get("/test", (req, res)=> {
-		res.render("test");
+	// not needed but you can use if you want to test something
+	router.get("/test", isAuthenticated, (req, res)=> {
+		//res.render("test", {user: req.user.name });
+		models.Field.findAll({where: {UserId:req.user.id}}).catch(error =>{
+			if(error) {
+				throw error;
+			}
+		}).then((fields) => {
+			res.render("test", {
+				"fields": fields, // placeholder
+				user: req.user.name
+			});
+		});
+	});
+
+	router.get("/confirmation-page", isAuthenticated, (req, res)=> {
+		res.render("confirmation-page");
+	});
+
+	router.get("/terms-info", isAuthenticated, (req, res)=> {
+		res.render("terms-info");
 	});
 
 	router.get("/field-input", checkNotAuthenticated, (req, res)=> {
 		res.render("field-input");
 	});
 
+	router.get("/enter-data", checkNotAuthenticated, (req, res)=> {
+		res.render("enter-data");
+	});
+
 	router.post("/field-input",(req, res) =>{
 		var user_id = req.user.id;
-		let {fieldname, address, acreage} = req.body;
-		if (isNaN(Number(acreage))) {
-			req.flash("errors", "Error: acreage must be a number");
+		let {address, acreage} = req.body;
+		
+		if (acreage === "" || address === "") {
+			var errors = [];
+			if(acreage === "") {
+				errors.push("Error: acreage must not be empty")
+			}
+			if(address === "") {
+				errors.push("Error: address must not be empty")
+			}
+			req.flash("errors", errors);
 			res.render("field-input");
+		} else {
+			req.flash("message", "Success!");
+			models.Field.create({UserId:user_id, address:address,size:acreage});
+			res.redirect("/users/datainput");
 		}
-		req.flash("message", "Success!");
-		models.Field.create({UserId:user_id, address:address,size:acreage});
-		res.redirect("/users/datainput");
 	});
 	
 	router.get("/logout", (req, res)=>{
@@ -179,5 +234,32 @@ module.exports = (params) => {
 		res.render("account");
 	});
 
+	router.get("/downloadCSV", isAuthenticated, async(req, res)=> {
+		const csv = new ObjectsToCsv(soilDataJSON);
+		await csv.toDisk('./data.csv')
+		res.download("./data.csv", () => {
+			fs.unlinkSync("./data.csv")
+		})
+	});
+
+	router.get("/downloadExcel", isAuthenticated, async(req, res)=> {
+		
+		const workSheet = XLSX.utils.json_to_sheet(soilDataJSON);
+    	const workBook = XLSX.utils.book_new();
+
+    	XLSX.utils.book_append_sheet(workBook, workSheet, "testOutput");
+    	//Generate buffer
+
+    	XLSX.write(workBook, {bookType:'xlsx', type:'buffer'});
+
+    	//Binary string
+    	XLSX.write(workBook, {bookType:'xlsx', type:'binary'});
+    	XLSX.writeFile(workBook, 'outputData.xlsx');
+
+		res.download("./outputData.xlsx", () => {
+			fs.unlinkSync("./outputData.xlsx");
+		});
+
+	});
 	return router;
 }

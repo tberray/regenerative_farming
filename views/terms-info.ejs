@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>test</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/sidenav.css">
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- navbar -->
+    <%- include('partials/navbar') %>
+    <!--navbar end-->
+
+    <!--go to https://boxicons.com to find icons and click where it says fonts for the <i class=''></i> (icon)-->
+    <%- include('partials/sidenav') %>
+
+    <div class="content">
+        <div class="terms-info pt-5 mx-auto">
+            <h2>Soil Terms Explained</h2>
+        </div>
+        <div class="terms-info sub-heading pt-5 mx-auto" id="physical-properties">
+            <h4>Physical Properties</h4>
+        </div>
+
+        <a class="anchor" id="bulk-density-anchor"></a>
+        <div class="terms-info pt-5 mx-auto" id="bulk-density">
+            <h6>Bulk Density</h6>
+        </div>
+        <div class="terms-info mx-auto">
+            <p>
+                The dry weight of soil is divided by its volume. Bulk density unit is g/cm3 (grams per cubic centimeter).
+            </p>
+        </div>
+
+        <a class="anchor" id="infiltration-anchor"></a>
+        <div class="terms-info pt-5 mx-auto" id="infiltration">
+            <h6>Infiltration</h6>
+        </div>
+        <div class="terms-info mx-auto">
+            <p>
+                Infiltration rate is a measure of the rate at which a particular soil can absorb rainfall or irrigation. 
+                The rate is measured in inches/hour or millimeters/hour.
+            </p>
+        </div>
+
+        <a class="anchor" id="slaking-anchor"></a>
+        <div class="terms-info pt-5 mx-auto" id="slaking">
+            <h6>Slaking</h6>
+        </div>
+        <div class="terms-info mx-auto">
+            <p>
+                Slaking is the breakdown of a lump of soil into smaller fragments when immersed in water.
+            </p>
+        </div>
+
+        <div class="terms-info pt-5 mx-auto" id="soil-crusts">
+            <h6>Soil Crusts</h6>
+        </div>
+        <div class="terms-info mx-auto">
+            <p>
+                Soil crusts are relatively thin, continuous layers of the soil surface that
+                 restrict water movement, air entry, and seedling emergence from the soil.
+                 Soil crusts are represented by their thickness and strength.
+            </p>
+        </div>
+
+        <a class="anchor" id="macropores-anchor"></a>
+        <div class="terms-info pt-5 mx-auto" id="macropores">
+            <h6>Soil Structure and Macropores</h6>
+        </div>
+        <div class="terms-info mx-auto">
+            <p>
+                Soil structures are the combination of core minerals of soil like sand, silt and clay particles.
+                 Soil structures affect water and air movement through soil, greatly influencing soil’s ability
+                  to sustain life and perform other vital soil functions
+            </p>
+        </div>
+
+
+        <div class="terms-info sub-heading pt-5 mx-auto" id="chemical-properties">
+            <h4>Chemical Properties</h4>
+        </div>
+
+        <div class="terms-info pt-5 mx-auto">
+            <h6>Reactive Carbon</h6>
+        </div>
+        <div class="terms-info mx-auto">
+            <p>
+                Reactive carbon (or permanganate oxidizable carbon) is a fraction of the soil organic matter pool of
+                 C that is oxidizable in the presence of potassium permanganate in the solution.
+            </p>
+        </div>
+
+        <a class="anchor" id="conductivity-anchor"></a>
+        <div class="terms-info pt-5 mx-auto" id="conductivity">
+            <h6>Soil Electrical Conductivity</h6>
+        </div>
+        <div class="terms-info mx-auto">
+            <p>
+                Soil Electrical Conductivity is a measure of the amount of salts in the soil.
+                 Excess salts hinder plant growth by affecting the soil-water balance. Measured in dS/m.
+            </p>
+        </div>
+        
+        <a class="anchor" id="nitrates-anchor"></a>
+        <div class="terms-info pt-5 mx-auto" id="nitrates">
+            <h6>Soil Nitrogen</h6>
+        </div>
+        <div class="terms-info mx-auto">
+            <p>
+                Nitrogen (N) is the most abundant element in the atmosphere and is usually the most limiting crop nutrient.
+                 Nitrate (NO3) serves as a source of nitrogen for the nutrition and growth of plants and microorganisms. 
+                 Nitrogen is added to soil naturally from N fixation by soil bacteria and legumes and through atmospheric
+                  deposition in rainfall. Additional N is typically supplied to the crop by fertilizers, manure, 
+                  or other organic materials. 
+            </p>
+            <p>
+                In general, a concentration range of 10—50 mg/kg (or 10-50 ppm) is good.
+            </p>
+        </div>
+
+        <a class="anchor" id="ph-anchor"></a>
+        <div class="terms-info pt-5 mx-auto" id="ph">
+            <h6>Soil pH</h6>
+        </div>
+        <div class="terms-info mx-auto">
+            <p>
+                Soil pH is the measure of acidity and the basicity of soil.
+                 Having the correct pH is important for healthy plant growth.
+                  It affects plant nutrient availability by controlling the chemical forms of the
+                   different nutrients and influencing the chemical reactions they undergo. 
+                   Most soils have pH values between 3.5 and 10. In higher rainfall areas the natural pH 
+                   of soils typically ranges from 5 to 7, while in drier areas the range is 6.5 to 9. 
+                   Soils can be classified according to their pH value:
+            </p>
+
+            <ul class="terms-ul">
+                <li>6.5 to 7.5 - neutral</li>
+                <li>over 7.5 - alkaline</li>
+                <li>less than 6.5 - acidic</li>
+                <li>less than 5.5 are considered strongly acidic.</li>
+            </ul>
+
+            <p>
+                Soil pH affects the amount of nutrients and chemicals that are soluble in soil water,
+                 and therefore the amount of nutrients available to plants.
+                  The development of strongly acidic soils (less than 5.5 pH) can result in poor plant growth.
+                   The correct balance is where the soil pH is between 5.5 and 7.5. 
+            </p>
+            <p>
+                Some fertilizers can help change your soil's pH level depending on whether you want to raise or lower it.
+                 Here are some options and tips as to how you can help your soil neutralize. 
+            </p>
+            <p>
+                Soil acidity can be corrected easily by liming the soil, 
+                or adding basic materials to neutralize the acid present.
+                 The most used liming material is agricultural limestone.
+                  It is not very water soluble which makes it easier to handle. 
+                  How it works is that when the lime dissolves into the soil,
+                   calcium moves to the surface of soil particles, replacing the acidity.
+                    The acidity reacts with the carbonate to form carbon dioxide and water. 
+                    The result is a soil that is less acidic meaning the pH is higher.
+            </p>
+            <p>
+                If your soil is alkaline, you can lower your soil’s pH or make it more acidic
+                 by using several products such as: sphagnum peat, elemental sulfur, and organic mulches.
+                  Alkaline building materials, such as limestone gravel and concrete, 
+                  and high pH irrigation water may also contribute to a soil's alkalinity.
+            </p>
+        </div>
+
+
+
+        <div class="terms-info sub-heading pt-5 mx-auto" id="biological-properties">
+            <h4>Biological Properties</h4>
+        </div>
+
+        <a class="anchor" id="earthworms-anchor"></a>
+        <div class="terms-info pt-5 mx-auto" id="earthworms">
+            <h6>Earthworms</h6>
+        </div>
+        <div class="terms-info mx-auto">
+            <p>
+                Earthworms occur in most temperate soils and many tropical soils.
+                 There are over 7,000 species ranging from an inch to two yards in length and
+                  are found seasonally at all depths in the soil.
+                   They stimulate microbial activity, mix and aggregate soil,
+                    increase infiltration, improve water-holding capacity, and more.
+                     Earthworms are often an indication of healthy soil.
+            </p>
+        </div>
+
+        <div class="terms-info pt-5 mx-auto" id="pom">
+            <h6>Particulate Organic Matter</h6>
+        </div>
+        <div class="terms-info mx-auto">
+            <p>
+                POM refers to all soil organic matter particles less than 2 mm and greater than
+                 0.053 mm in size. They are a source of food/energy for microorganisms and soil animals
+                  as well as nutrients for plant growth. They increase aggregate stability, water infiltration, and soil aeration.
+            </p>
+        </div>
+
+        <div class="terms-info pt-5 mx-auto" id="pmn">
+            <h6>Potentially Mineralizable Nitrogen</h6>
+        </div>
+        <div class="terms-info mx-auto">
+            <p>
+                PMN is the fraction of organic nitrogen converted to plant-available forms
+                 under specific conditions of temperature, moisture, aeration, and time.
+                 PMN originates mainly from microbial biomass and plant and animal tissues.
+                 PMN can be a source of available nitrogen microbial growth in soil.
+            </p>
+        </div>
+
+        <div class="terms-info pt-5 mx-auto" id="soil-enzymes">
+            <h6>Soil Enzymes</h6>
+        </div>
+        <div class="terms-info mx-auto">
+            <p>
+                Soil enzymes increase the reaction rate at which plant residues decompose and release
+                 plant-available nutrients. Sources of soil enzymes include living and dead microbes,
+                  plant roots and residues, and soil animals. Enzymes play an important role in
+                   organic matter decomposition and nutrient cycling.
+            </p>
+        </div>
+
+        <div class="terms-info pt-5 mx-auto" id="soil-respiration">
+            <h6>Soil Respiration</h6>
+        </div>
+        <div class="terms-info mx-auto">
+            <p>
+                Carbon dioxide released from the soil surface is referred to as soil respiration.
+                 CO2 results from several sources, including aerobic microbial decomposition of soil organic matter.
+                  Soil respiration is one measure of biological activity and decomposition.
+                   Soil respiration reflects the capacity of soil to support soil life including crops,
+                    soil animals, and microorganisms.
+            </p>
+        </div>
+
+        <div class="terms-info pt-5 mx-auto" id="toc">
+            <h6>Total Organic Carbon</h6>
+        </div>
+        <div class="terms-info mx-auto">
+            <p>
+                Total organic carbon is the carbon stored in soil organic matter (SOM).
+            </p>
+        </div>
+
+
+
+
+    </div><!--end content div-->
+
+</body>
+</html>
