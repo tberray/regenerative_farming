@@ -34,7 +34,8 @@
     
 
     <div class="content-no-sidenav">
-        <div class="mx-auto pt-5" style="width: 200px;">
+        <div class="center">
+        <div class="mx-auto pt-5" style="width: 200px; margin-left: 150px;">
             <h2>Login</h2>
         </div>
         
@@ -54,24 +55,25 @@
         </div>
 
         <img class="mke-circle" src="/images/1200px-University_of_Wisconsin–Milwaukee_seal.svg.png" alt="regenerative agriculture">
-
+       
         <div class="mx-auto form-group" style="width: 200px;">
             <form action="/users/login" class="login-form" method="POST">
-                <div class="pt-2 bottom-form">
-                    <label for="email">Email address</label>
+                <div class="form-floating">
+                    <label for="email">Email Address</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Email" required />
                 </div>
                 <div class="pt-2 bottom-form">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control"id="password" name="password" placeholder="Password" required />
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required />
                 </div>
                 <div class="pt-2 bottom-form">
                     <input type="submit" class="btn btn-success btn-block" value="Login" />
                 </div>
-
-                <a href="/users/register" class="register-text">Register</a>
             </form>
         </div>
+
+        <p>Don't have an account yet? <a href="/users/register">Sign up</a> </p> 
+    </div>
     </div> <!--end content div-->
 
 </body>
