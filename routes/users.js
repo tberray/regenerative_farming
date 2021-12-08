@@ -25,7 +25,7 @@ module.exports = (params) => {
 	});
 	
 	router.get("/dashboard", checkNotAuthenticated, (req, res)=> {
-		//res.render("dashboard", {user: req.user.name });
+		//res.render("test", {user: req.user.name });
 		models.Field.findAll({where: {UserId:req.user.id}}).catch(error =>{
 			if(error) {
 				throw error;
@@ -93,7 +93,7 @@ module.exports = (params) => {
 				earthwormCount:i.earthworms, penResistance:i.penetrationResist}];
 			req.flash("message", "Success!");
 
-			res.redirect("/users/datainput"); // temporary
+			res.redirect("/users/confirmation-page"); // temporary
 		}
 	});
 
@@ -105,8 +105,12 @@ module.exports = (params) => {
 		res.render("about");
 	});
 
+	router.get("/about-us", isAuthenticated, (req, res)=> {
+		res.render("about-us");
+	});
+
 	// not needed but you can use if you want to test something
-	router.get("/test", isAuthenticated, (req, res)=> {
+	/*router.get("/test", isAuthenticated, (req, res)=> {
 		//res.render("test", {user: req.user.name });
 		models.Field.findAll({where: {UserId:req.user.id}}).catch(error =>{
 			if(error) {
@@ -119,6 +123,7 @@ module.exports = (params) => {
 			});
 		});
 	});
+	*/
 
 	router.get("/confirmation-page", isAuthenticated, (req, res)=> {
 		res.render("confirmation-page");
@@ -149,11 +154,11 @@ module.exports = (params) => {
 				errors.push("Error: address must not be empty")
 			}
 			req.flash("errors", errors);
-			res.render("field-input");
+			res.redirect("field-input");
 		} else {
 			req.flash("message", "Success!");
 			models.Field.create({UserId:user_id, address:address,size:acreage});
-			res.redirect("/users/datainput");
+			res.redirect("/users/confirmation-page");
 		}
 	});
 	

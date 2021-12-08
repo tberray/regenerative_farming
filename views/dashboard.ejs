@@ -21,16 +21,20 @@
     <!--go to https://boxicons.com to find icons and click where it says fonts for the <i class=''></i> (icon)-->
     <%- include('partials/sidenav') %>
 
+    <img class="mke-circle2" src="/images/1200px-University_of_Wisconsin–Milwaukee_seal.svg.png" alt="uwm circle">
+
     <div class="content">
       <div class="dashboard-parent">
         <section>
-          <h1><%= user.charAt(0).toUpperCase() + user.slice(1) %>'s Dashboard</h1><br>
-
+          <h1 class="center"><%= user.charAt(0).toUpperCase() + user.slice(1) %>'s Dashboard</h1><br>
+          <hr class="solid">
         </section>
+        
         <section>
           
-          <h2>My Fields:</h2>
-          <table class="fieldTable">
+          <h2 class="center">My Fields</h2>
+          
+          <table class="table table-striped">
             <tr>
               <th>Address</th>
               <th>Acreage</th>
@@ -46,13 +50,15 @@
               
               <% } %>
           </table>
+          <hr class="solid">
         </section>
         <section>
+            <h4>Export</h4>
             <a href="/users/downloadCSV">Click to download CSV</a><br>
             <a href="/users/downloadExcel">Click to download Excel</a>
         </section>
         <section>
-           rghpguorio j gjioj avpjoav jiov nvaaj vc vjn pdvk mk dpaad pkoad pmkdad pmkd pk nvk nv pnl pnklad pmklawd mkld mkl
+            <img  src="/images/field jpg.jpg" alt="field">
         </section>
       </div>
     </div>

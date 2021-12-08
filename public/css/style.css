@@ -9,6 +9,11 @@ body {
     margin-left: 78px;
     margin-top: 78px;
 }
+
+.center {
+    display: block;
+    text-align: center;
+}
 .content-no-sidenav {
     margin-top: 78px;
 }
@@ -109,13 +114,12 @@ body {
 }
 
 .about-page-picture {
-    position: absolute;
-    height: 250px;
-    width: 400px;
-    top: 300px;
-    left: 880px;
+    float: right;
+    height: 200px;
+    width: 300px;
+
     border-radius: 10%;
-    visibility: hidden;
+    visibility: visible;
 }
 @media only screen and (min-width: 1300px) {
     .about-page-picture {
@@ -125,7 +129,7 @@ body {
 
 
 .mke-circle {
-    position: absolute;
+    position: fixed;
     height: 80px;
     width: 80px;
     top: 40px;
@@ -169,6 +173,28 @@ body {
     margin-left: -20px;
 }
 
+.mke-circle2 {
+    position: fixed;
+    height: 50px;
+    width: 50px;
+    top: 10px;
+    left: 96%;
+    margin-left: -20px;
+    visibility: hidden;
+}
+
+@media only screen and (min-width: 770px) {
+    .mke-circle2 {
+        position: fixed;
+        height: 50px;
+        width: 50px;
+        top: 10px;
+        left: 96%;
+        margin-left: -20px;
+        visibility: visible;
+    }
+}
+
 .fieldTable table, td, th {
     border: 1px solid black;
 }
@@ -202,19 +228,19 @@ body {
 
 section:nth-of-type(1) {
     grid-area: sect1;
-    border: 1px solid black;
+    border: none;
 }
 section:nth-of-type(2) {
     grid-area: sect2;
-    border: 1px solid black;
+    border: none;
 }
 section:nth-of-type(3) {
     grid-area: sect3;
-    border: 1px solid black;
+    border: none;
 }
 section:nth-of-type(4) {
     grid-area: sect4;
-    border: 1px solid black;
+    border: none;
 }
 
 @media only screen and (min-width: 640px) {
