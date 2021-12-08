@@ -130,7 +130,7 @@ body {
 
 
 .mke-circle {
-    position: absolute;
+    position: fixed;
     height: 80px;
     width: 80px;
     top: 40px;
@@ -172,6 +172,28 @@ body {
 
 .mke-circle-register {
     margin-left: -20px;
+}
+
+.mke-circle2 {
+    position: fixed;
+    height: 50px;
+    width: 50px;
+    top: 10px;
+    left: 96%;
+    margin-left: -20px;
+    visibility: hidden;
+}
+
+@media only screen and (min-width: 770px) {
+    .mke-circle2 {
+        position: fixed;
+        height: 50px;
+        width: 50px;
+        top: 10px;
+        left: 96%;
+        margin-left: -20px;
+        visibility: visible;
+    }
 }
 
 .fieldTable table, td, th {
