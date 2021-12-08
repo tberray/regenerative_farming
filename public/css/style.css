@@ -114,16 +114,33 @@ body {
 }
 
 .about-page-picture {
-    float: right;
-    height: 200px;
-    width: 300px;
-
-    border-radius: 10%;
-    visibility: visible;
+    height: 0px;
+    width: 0px;
+    visibility: hidden;
 }
+@media only screen and (min-width: 800px) {
+    .about-page-picture {
+        visibility: visible;
+        float: right;
+        height: 150px;
+        width: 200px;
+        padding-left: 10px;
+        padding-bottom: 10px;
+    
+        border-radius: 10%;
+    }
+}
+
 @media only screen and (min-width: 1300px) {
     .about-page-picture {
         visibility: visible;
+        float: right;
+        height: 200px;
+        width: 300px;
+        padding-left: 10px;
+        padding-bottom: 10px;
+    
+        border-radius: 10%;
     }
 }
 
@@ -206,6 +223,83 @@ body {
 .fieldTable table {
     width: 100%;
     border-collapse: collapse;
+}
+
+.dashboard-img {
+    visibility: visible;
+    float: right;
+    height: 500px;
+    width: 500px;
+    padding-left: 10px;
+    padding-bottom: 100px;
+
+    border-radius: 10%;
+}
+
+.dashboard-img2 {
+    height: 0px;
+    width: 0px;
+    visibility: hidden;
+}
+
+.dashboard-img3 {
+    height: 0px;
+    width: 0px;
+    visibility: hidden;
+}
+
+@media only screen and (min-width: 900px) {
+    .dashboard-img2 {
+        position: relative;
+        top: 20px;
+        float: left;
+        height: 20px;
+        width: 20%;
+        z-index: -1;
+        border-radius: 20%;
+        visibility: visible;
+    }
+    
+    .dashboard-img3 {
+        position: relative;
+        top: 20px;
+        float: right;
+        height: 20px;
+        width: 20%;
+        z-index: -1;
+        border-radius: 20%;
+        visibility: visible;
+    }
+}
+
+@media only screen and (min-width: 1400px) {
+    .dashboard-img2 {
+        position: relative;
+        top: 20px;
+        float: left;
+        height: 20px;
+        width: 25%;
+        z-index: -1;
+        border-radius: 20%;
+        visibility: visible;
+    }
+    
+    .dashboard-img3 {
+        position: relative;
+        top: 20px;
+        float: right;
+        height: 20px;
+        width: 25%;
+        z-index: -1;
+        border-radius: 20%;
+        visibility: visible;
+    }
+}
+
+.dash-title {
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /************************** dashboard grid sections ******************************************************************************/
