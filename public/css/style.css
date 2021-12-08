@@ -9,6 +9,11 @@ body {
     margin-left: 78px;
     margin-top: 78px;
 }
+
+.center {
+    display: block;
+    text-align: center;
+}
 .content-no-sidenav {
     margin-top: 78px;
 }
@@ -202,19 +207,19 @@ body {
 
 section:nth-of-type(1) {
     grid-area: sect1;
-    border: 1px solid black;
+    border: none;
 }
 section:nth-of-type(2) {
     grid-area: sect2;
-    border: 1px solid black;
+    border: none;
 }
 section:nth-of-type(3) {
     grid-area: sect3;
-    border: 1px solid black;
+    border: none;
 }
 section:nth-of-type(4) {
     grid-area: sect4;
-    border: 1px solid black;
+    border: none;
 }
 
 @media only screen and (min-width: 640px) {
