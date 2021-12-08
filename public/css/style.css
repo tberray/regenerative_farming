@@ -114,13 +114,12 @@ body {
 }
 
 .about-page-picture {
-    position: absolute;
-    height: 250px;
-    width: 400px;
-    top: 300px;
-    left: 880px;
+    float: right;
+    height: 200px;
+    width: 300px;
+
     border-radius: 10%;
-    visibility: hidden;
+    visibility: visible;
 }
 @media only screen and (min-width: 1300px) {
     .about-page-picture {
