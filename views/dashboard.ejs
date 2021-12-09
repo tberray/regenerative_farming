@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
-    <title>Document</title>
+    <title>Dashboard</title>
 </head>
 <body>
 
@@ -26,7 +26,15 @@
     <div class="content">
       <div class="dashboard-parent">
         <section>
-          <h1 class="center"><%= user.charAt(0).toUpperCase() + user.slice(1) %>'s Dashboard</h1><br>
+            <img class="dashboard-img2" src="/images/solid-green-background.jpg" alt="green">
+            <img class="dashboard-img3" src="/images/solid-green-background.jpg" alt="green">
+          <h1 class="center dash-title">
+            
+              <%= user.charAt(0).toUpperCase() + user.slice(1) %>'s Dashboard
+              
+            </h1>
+            
+            <br>
           <hr class="solid">
         </section>
         
@@ -58,7 +66,7 @@
             <a href="/users/downloadExcel">Click to download Excel</a>
         </section>
         <section>
-            <img  src="/images/field jpg.jpg" alt="field">
+            <img class="dashboard-img" src="/images/field jpg.jpg" alt="field">
         </section>
       </div>
     </div>
