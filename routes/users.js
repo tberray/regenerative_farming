@@ -224,7 +224,10 @@ module.exports = (params) => {
 	});
 	
 	router.post(
-		"/login", 
+		"/login", (req, res, next) => {
+			req.session.email = req.body.email;
+			next();
+		},
 		passport.authenticate("local", {
 			successRedirect: "/users/dashboard", 
 			failureRedirect: "/users/login", 
@@ -240,6 +243,11 @@ module.exports = (params) => {
 		// TODO: handle account modification.
 		let {oldPass, newPass, newPassConfirm}  = req.body;
 
+		if (!req.session.email)
+		{
+			res.redirect("/logout");
+		}
+
 		if (!oldPass || !newPass || !newPassConfirm)
 		{
 			let error = "Please enter all fields";
@@ -252,9 +260,29 @@ module.exports = (params) => {
 			res.render("account", { error });
 		}
 
+		models.User.findAll({where: {
+			email: req.session.email
+		}}).catch(() => {
+			res.redirect("/logout");
+		}).then(async users => {
+			if (users !== undefined && users.length === 1)
+			{
+				let user = users[0];
+				let error = undefined;
+				await bcrypt.compare(oldPass, user.password, (err, isMatch) => {
+					if (!isMatch)
+					{
+						let error = "Error: old password is incorrect";
+						res.render("account", { error });
+					}
+					else
+					{
+						res.render("account", {message: "Success!"});
+					}
+				});
+			}
+		});
 
-
-		res.render("account", {message: "Success!"});
 	});
 
 	router.get("/downloadCSV", isAuthenticated, async(req, res)=> {
