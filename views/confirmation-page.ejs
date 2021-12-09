@@ -19,10 +19,16 @@
     <%- include('partials/sidenav') %>
 
 
-    <div class="about-paragraph pt-5 mx-auto">
+    <div class="content">
+      <div class="confirmation-page">
         <h6>Your submission has been accepted.</h6>
-        <a href="/users/dashboard">Click here to return to dashboard</a>
+        <a href="/users/datainput">Click here to enter more soil data</a>
+        <p>Or wait and you will be redirected to the dashboard in 5 seconds.</p>
+      </div>
+      
     </div>
+
+    <meta http-equiv="refresh" content="5;url=/users/dashboard" />
     
     
 
