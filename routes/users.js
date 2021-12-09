@@ -109,6 +109,10 @@ module.exports = (params) => {
 		res.render("about-us");
 	});
 
+	router.get("/cover-crops", isAuthenticated, (req, res)=> {
+		res.render("cover-crops");
+	});
+
 	// not needed but you can use if you want to test something
 	/*router.get("/test", isAuthenticated, (req, res)=> {
 		//res.render("test", {user: req.user.name });
