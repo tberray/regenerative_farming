@@ -3,6 +3,9 @@ const models = require('../sequelize/models/index')
 const XLSX = require('xlsx')
 const router = express.Router();
 const fs = require('fs');
+const upload = require("express-fileupload");
+
+router.use(upload());
 const ObjectsToCsv = require('objects-to-csv');
 let soilDataJSON = [{"FieldId":"", "pH":"", "nitrate":"", "phosphorus":"", 
 	"potassium":"", "tempterature":"", "pctCo2":"", "infiltration":"", 
@@ -311,6 +314,126 @@ module.exports = (params) => {
 			fs.unlinkSync("./outputData.xlsx");
 		});
 
+	});
+
+	router.get("/downloadBlankExcel", isAuthenticated, async(req, res)=> {
+		
+		let soilDataJSONBlank = [{"FieldId":"", "pH":"", "nitrate":"", "phosphorus":"", 
+			"potassium":"", "tempterature":"", "pctCo2":"", "infiltration":"", 
+			"blkDensity":"", "conductivity":"", "aggStability":"", "slakingRating":"", 
+			"earthwormCount":"", "penResistance": ""}];
+		const workSheet = XLSX.utils.json_to_sheet(soilDataJSONBlank);
+    	const workBook = XLSX.utils.book_new();
+
+    	XLSX.utils.book_append_sheet(workBook, workSheet, "testOutput");
+    	//Generate buffer
+
+    	XLSX.write(workBook, {bookType:'xlsx', type:'buffer'});
+
+    	//Binary string
+    	XLSX.write(workBook, {bookType:'xlsx', type:'binary'});
+    	XLSX.writeFile(workBook, 'outputData.xlsx');
+
+		res.download("./outputData.xlsx", () => {
+			fs.unlinkSync("./outputData.xlsx");
+		});
+
+	});
+
+	router.get("/upload", isAuthenticated, async(req, res) => {
+		res.sendFile(__dirname + '/dashboard.ejs')
+	});
+
+	router.post("/upload", function(req,res) {
+		if(req.files) {
+			var file = req.files.filename,
+				filename = file.name;
+			file.mv("./upload/" + filename, function(err) {
+				if (err) {
+				res.send("error occured")
+				}
+				else {
+					req.flash("message", "Success!");
+					var workbook = XLSX.readFile("./upload/outputData.xlsx");
+					let worksheet = workbook.Sheets[workbook.SheetNames[0]];
+
+					let post = {};
+					let posts = [];
+					post.FieldId = '';
+					post.pH = '';
+					post.nitrate = '';
+					post.phosphorus = '';
+					post.potassium = '';
+					post.tempterature = '';
+					post.pctCo2 = '';
+					post.infiltration = '';
+					post.blkDensity = '';
+					post.conductivity = '';
+					post.aggStability = '';
+					post.slakingRating = '';
+					post.earthwormCount = '';
+					post.penResistance = '';
+						
+					if (worksheet[`A${2}`]) {
+						post.FieldId = worksheet[`A${2}`].v;
+					}
+					if (worksheet[`B${2}`]) {
+						post.pH = worksheet[`B${2}`].v;
+					}
+					if (worksheet[`C${2}`]) {
+						post.nitrate = worksheet[`C${2}`].v;
+					}
+					if (worksheet[`D${2}`]) {
+						post.phosphorus = worksheet[`D${2}`].v;
+					}
+					if (worksheet[`E${2}`]) {
+						post.potassium = worksheet[`E${2}`].v;
+					}
+					if (worksheet[`F${2}`]) {
+						post.tempterature = worksheet[`F${2}`].v;
+					}
+					if (worksheet[`G${2}`]) {
+						post.pctCo2 = worksheet[`G${2}`].v;
+					}
+					if (worksheet[`H${2}`]) {
+						post.infiltration = worksheet[`H${2}`].v;
+					}
+					if (worksheet[`I${2}`]) {
+						post.blkDensity = worksheet[`I${2}`].v;
+					}
+					if (worksheet[`J${2}`]) {
+						post.conductivity = worksheet[`J${2}`].v;
+					}
+					if (worksheet[`K${2}`]) {
+						post.aggStability = worksheet[`K${2}`].v;
+					}
+					if (worksheet[`L${2}`]) {
+						post.slakingRating = worksheet[`L${2}`].v;
+					}
+					if (worksheet[`M${2}`]) {
+						post.earthwormCount = worksheet[`M${2}`].v;
+					}
+					if (worksheet[`N${2}`]) {
+						post.penResistance = worksheet[`N${2}`].v;
+					}
+					posts.push(post)
+
+					models.SoilEntry.create({FieldId:post.FieldId, pH:post.pH, nitrate:post.nitrate, phosphorus:post.phosphorus, 
+						potassium:post.potassium, tempterature:post.tempterature, pctCo2:post.pctCo2, infiltration:post.infiltration, 
+						blkDensity:post.blkDensity, conductivity:post.conductivity, aggStability:post.aggStability, slakingRating:post.slakingRating, 
+						earthwormCount:post.earthwormCount, penResistance:post.penResistance});
+					
+					soilDataJSON = [{FieldId:post.FieldId, pH:post.pH, nitrate:post.nitrate, phosphorus:post.phosphorus, 
+						potassium:post.potassium, tempterature:post.tempterature, pctCo2:post.pctCo2, infiltration:post.infiltration, 
+						blkDensity:post.blkDensity, conductivity:post.conductivity, aggStability:post.aggStability, slakingRating:post.slakingRating, 
+						earthwormCount:post.earthwormCount, penResistance:post.penResistance}];
+
+					
+					fs.unlinkSync("./upload/outputData.xlsx")
+					res.redirect("/users/datainput");
+				}
+			})
+		}
 	});
 	return router;
 }

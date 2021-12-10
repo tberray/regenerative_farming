@@ -40,18 +40,24 @@
             <% if (messages.message) { %>
                 <p><%= messages.message %></p>
             <% } %>
-        </div>
-        <br>
-
-
+        
+        <br><br>
+      
+            <h4>Upload With Excel</h4>
+            <a href="/users/downloadBlankExcel">Download blank form</a>
+            <form method="post" enctype="multipart/form-data" action="/users/upload">
+                <input type="file" accept="xls,.xlsx" name="filename"><br>
+                <input type="submit" value="upload">
+            </form><br><br>
         <!--title and instructions end-->
-
+    </div>
         <!--form-->
         <div class="container">
+        <h4>Upload With Form</h4><br>
         <form action="/users/datainput" method="POST">
-
             <!--Field-->
             <div class="row">
+    
                 <div class="label-column">
                     <label for="field" class="form-labels">Field</label>
                 </div>
