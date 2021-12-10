@@ -22,22 +22,26 @@
     <!--navbar end-->
 
     <div class="content-no-sidenav">
-        <div class="mx-auto pt-5" style="width: 200px;">
+        <div class="mx-auto pt-5 register-title">
             <h2>Register</h2>
         </div>
 
-        <div class="mx-auto login-form" style="width: 200px;">
-            <ul class="login-form-errors">
+        <!--div class="mx-auto login-form-popins">
+            <ul class="login-form-errors" style="left: -50px;">
                 <% if(typeof errors != 'undefined') { %> <% errors.forEach(error=>{ %>
-                <li> <%= error.message %> </li>
+                <li class="login-li"> <%= error.message %> </li>
                 <% }) %> <% } %>
             </ul>
-        </div>  
+        </div-->  
 
-        <img class="mke-circle mke-circle-register" src="/images/1200px-University_of_Wisconsin–Milwaukee_seal.svg.png" alt="uwm circle">
+        <% if(typeof errors != 'undefined') { %> <% errors.forEach(error=>{ %>
+        <p style="text-align: center; color:red;"> <%= error.message %> </li>
+        <% }) %> <% } %>
 
-        <div class="mx-auto form-group" style="width: 200px;">
-            <form action="/users/register" class="register-form" method="POST">
+        <img class="mke-circle" src="/images/1200px-University_of_Wisconsin–Milwaukee_seal.svg.png" alt="uwm circle">
+
+        <div class="mx-auto form-group" style="width: 300px;">
+            <form action="/users/register" class="login-form" method="POST">
                 <div class="pt-2">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="Name" required />
@@ -57,8 +61,10 @@
                 <div class="pt-2">
                     <input type="submit" class="btn btn-success btn-block" value="Register" />
                 </div>
-                <p>Already registered?</p>
-                <a href="/users/login">Login here</a>
+                <p style="text-align: center;">Already registered? <br>
+                    <a href="/users/login">Login here</a>
+                </p>
+                
             </form>
         </div>
     </div> <!--end content div-->
