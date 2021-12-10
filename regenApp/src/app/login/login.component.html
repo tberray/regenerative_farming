@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <title>REgen</title>
+  </head>
+  <body>
+
+    <div class="container">
+        <div class="position-relative">
+            <div class="position-absolute top-0 start-0"></div>
+            <div class="position-absolute top-0 start-50 translate-middle-x"></div>
+            <div class="position-absolute top-0 end-0"></div>
+            <div class="position-absolute top-50 start-0 translate-middle-y"></div>
+            <div class="position-absolute top-50 start-50 translate-middle"></div>
+            <div class="position-absolute top-50 end-0 translate-middle-y"></div>
+            <div class="position-absolute bottom-0 start-0"></div>
+            <div class="position-absolute bottom-0 start-50 translate-middle-x"></div>
+            <div class="position-absolute bottom-0 end-0"></div>
+        </div>
+        <form action="/users/login" method="POST">
+        {% csrf_token %}
+            <br>
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a9/University_of_Wisconsin%E2%80%93Milwaukee_seal.svg/1200px-University_of_Wisconsin%E2%80%93Milwaukee_seal.svg.png"
+             class="rounded mx-auto d-block" alt="UWM Logo" alt width="200" height="200">
+        <h1>REgen</h1>
+        <h2>Please Sign In</h2>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email" required>
+                <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Password" required>
+                <label for="floatingPassword">Password</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-warning btn-lg" value="Login">Login</button><br><br>
+            <a class="btn btn-light btn-sm" href="/forgot-password/" role="button">Forgot Password?</a>
+        </form>
+    </div>
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

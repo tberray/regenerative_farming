@@ -192,40 +192,42 @@ module.exports = (params) => {
 	
 		if(errors.length > 0) {
 			res.render("register", { errors });
-		} else {
-			// form validation has passed
-
-			models.User.findAll({where:{email: email}}).catch(error =>{
-				if(error) {
-					throw error;
-				}
-			}).then((users) => {
-				// console.log(users)
-				if(users.length > 0) {
-					errors.push({message: "Email already registered"});
-					res.render("register", { errors })
-				} else {
-					(async() => {
-						let hashedPassword = await bcrypt.hash(password, 10);
-						models.User.create({ name: name, email: email, password: hashedPassword }).then((user) => {
-							// console.log(user);
-						}).catch(error => {
-							if(error) {
-								throw error;
-							}
-						});
-					})();
-					
-					//TODO check for error thrown
-					req.flash("success_msg", "You are now registered. Please log in");
-					res.redirect("/users/login");
-				}
-			});
 		}
+		// form validation has passed
+
+		models.User.findAll({where:{email: email}}).catch(error =>{
+			if(error) {
+				throw error;
+			}
+		}).then((users) => {
+			// console.log(users)
+			if(users.length > 0) {
+				errors.push({message: "Email already registered"});
+				res.render("register", { errors })
+			} else {
+				(async() => {
+					let hashedPassword = await bcrypt.hash(password, 10);
+					models.User.create({ name: name, email: email, password: hashedPassword }).then((user) => {
+						// console.log(user);
+					}).catch(error => {
+						if(error) {
+							throw error;
+						}
+					});
+				})();
+				
+				//TODO check for error thrown
+				req.flash("success_msg", "You are now registered. Please log in");
+				res.redirect("/users/login");
+			}
+		});
 	});
 	
 	router.post(
-		"/login", 
+		"/login", (req, res, next) => {
+			req.session.email = req.body.email;
+			next();
+		},
 		passport.authenticate("local", {
 			successRedirect: "/users/dashboard", 
 			failureRedirect: "/users/login", 
@@ -239,8 +241,48 @@ module.exports = (params) => {
 
 	router.post("/account", checkNotAuthenticated, (req, res) => {
 		// TODO: handle account modification.
+		let {oldPass, newPass, newPassConfirm}  = req.body;
 
-		res.render("account");
+		if (!req.session.email)
+		{
+			res.redirect("/logout");
+		}
+
+		if (!oldPass || !newPass || !newPassConfirm)
+		{
+			let error = "Please enter all fields";
+			res.render("account", { error })
+		}
+
+		if (newPass !== newPassConfirm)
+		{
+			let error = "Error: passwords do not match";
+			res.render("account", { error });
+		}
+
+		models.User.findAll({where: {
+			email: req.session.email
+		}}).catch(() => {
+			res.redirect("/logout");
+		}).then(async users => {
+			if (users !== undefined && users.length === 1)
+			{
+				let user = users[0];
+				let error = undefined;
+				await bcrypt.compare(oldPass, user.password, (err, isMatch) => {
+					if (!isMatch)
+					{
+						let error = "Error: old password is incorrect";
+						res.render("account", { error });
+					}
+					else
+					{
+						res.render("account", {message: "Success!"});
+					}
+				});
+			}
+		});
+
 	});
 
 	router.get("/downloadCSV", isAuthenticated, async(req, res)=> {
