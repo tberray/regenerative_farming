@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
-    <title>Document</title>
+    <title>Dashboard</title>
 </head>
 <body>
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -16,15 +17,58 @@
     <!-- navbar -->
     <%- include('partials/navbar') %>
     <!--navbar end-->
+
+    <!--go to https://boxicons.com to find icons and click where it says fonts for the <i class=''></i> (icon)-->
     <%- include('partials/sidenav') %>
 
+    <img class="mke-circle2" src="/images/1200px-University_of_Wisconsin–Milwaukee_seal.svg.png" alt="uwm circle">
+
     <div class="content">
-        <div class="mx-auto pt-5" style="width: 300px;">
-            <h1>Hello <%= user.charAt(0).toUpperCase() + user.slice(1) %></h1><br>
+      <div class="dashboard-parent">
+        <section>
+            <img class="dashboard-img2" src="/images/solid-green-background.jpg" alt="green">
+            <img class="dashboard-img3" src="/images/solid-green-background.jpg" alt="green">
+          <h1 class="center dash-title">
+            
+              <%= user.charAt(0).toUpperCase() + user.slice(1) %>'s Dashboard
+              
+            </h1>
+            
+            <br>
+          <hr class="solid">
+        </section>
+        
+        <section>
+          
+          <h2 class="center">My Fields</h2>
+          
+          <table class="table table-striped">
+            <tr>
+              <th>Address</th>
+              <th>Acreage</th>
+            </tr>
+            <tr>
+              <% if (typeof(fields) !== undefined) { %>
+                <% for (let field of fields) { %>
+                <tr>
+                  <td> <%= field.address %></td>
+                  <td> <%= field.size %> </td>
+                </tr>
+                <% } %>
+              
+              <% } %>
+          </table>
+          <hr class="solid">
+        </section>
+        <section>
+            <h4>Export</h4>
             <a href="/users/downloadCSV">Click to download CSV</a><br>
             <a href="/users/downloadExcel">Click to download Excel</a>
-        </div>
+        </section>
+        <section>
+            <img class="dashboard-img" src="/images/field jpg.jpg" alt="field">
+        </section>
+      </div>
     </div>
-    
 </body>
 </html>

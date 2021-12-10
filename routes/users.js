@@ -28,7 +28,17 @@ module.exports = (params) => {
 	});
 	
 	router.get("/dashboard", checkNotAuthenticated, (req, res)=> {
-		res.render("dashboard", {user: req.user.name });
+		//res.render("test", {user: req.user.name });
+		models.Field.findAll({where: {UserId:req.user.id}}).catch(error =>{
+			if(error) {
+				throw error;
+			}
+		}).then((fields) => {
+			res.render("dashboard", {
+				"fields": fields, // placeholder
+				user: req.user.name
+			});
+		});
 	});
 
 	router.get("/datainput", checkNotAuthenticated, (req, res)=> {
@@ -86,7 +96,7 @@ module.exports = (params) => {
 				earthwormCount:i.earthworms, penResistance:i.penetrationResist}];
 			req.flash("message", "Success!");
 
-			res.redirect("/users/datainput"); // temporary
+			res.redirect("/users/confirmation-page"); // temporary
 		}
 	});
 
@@ -98,10 +108,29 @@ module.exports = (params) => {
 		res.render("about");
 	});
 
-	// not needed but you can use if you want to test something
-	router.get("/test", isAuthenticated, (req, res)=> {
-		res.render("test");
+	router.get("/about-us", isAuthenticated, (req, res)=> {
+		res.render("about-us");
 	});
+
+	router.get("/cover-crops", isAuthenticated, (req, res)=> {
+		res.render("cover-crops");
+	});
+
+	// not needed but you can use if you want to test something
+	/*router.get("/test", isAuthenticated, (req, res)=> {
+		//res.render("test", {user: req.user.name });
+		models.Field.findAll({where: {UserId:req.user.id}}).catch(error =>{
+			if(error) {
+				throw error;
+			}
+		}).then((fields) => {
+			res.render("test", {
+				"fields": fields, // placeholder
+				user: req.user.name
+			});
+		});
+	});
+	*/
 
 	router.get("/confirmation-page", isAuthenticated, (req, res)=> {
 		res.render("confirmation-page");
@@ -115,16 +144,29 @@ module.exports = (params) => {
 		res.render("field-input");
 	});
 
+	router.get("/enter-data", checkNotAuthenticated, (req, res)=> {
+		res.render("enter-data");
+	});
+
 	router.post("/field-input",(req, res) =>{
 		var user_id = req.user.id;
-		let {fieldname, address, acreage} = req.body;
-		if (isNaN(Number(acreage))) {
-			req.flash("errors", "Error: acreage must be a number");
-			res.render("field-input");
+		let {address, acreage} = req.body;
+		
+		if (acreage === "" || address === "") {
+			var errors = [];
+			if(acreage === "") {
+				errors.push("Error: acreage must not be empty")
+			}
+			if(address === "") {
+				errors.push("Error: address must not be empty")
+			}
+			req.flash("errors", errors);
+			res.redirect("field-input");
+		} else {
+			req.flash("message", "Success!");
+			models.Field.create({UserId:user_id, address:address,size:acreage});
+			res.redirect("/users/confirmation-page");
 		}
-		req.flash("message", "Success!");
-		models.Field.create({UserId:user_id, address:address,size:acreage});
-		res.redirect("/users/datainput");
 	});
 	
 	router.get("/logout", (req, res)=>{
@@ -153,40 +195,42 @@ module.exports = (params) => {
 	
 		if(errors.length > 0) {
 			res.render("register", { errors });
-		} else {
-			// form validation has passed
-
-			models.User.findAll({where:{email: email}}).catch(error =>{
-				if(error) {
-					throw error;
-				}
-			}).then((users) => {
-				// console.log(users)
-				if(users.length > 0) {
-					errors.push({message: "Email already registered"});
-					res.render("register", { errors })
-				} else {
-					(async() => {
-						let hashedPassword = await bcrypt.hash(password, 10);
-						models.User.create({ name: name, email: email, password: hashedPassword }).then((user) => {
-							// console.log(user);
-						}).catch(error => {
-							if(error) {
-								throw error;
-							}
-						});
-					})();
-					
-					//TODO check for error thrown
-					req.flash("success_msg", "You are now registered. Please log in");
-					res.redirect("/users/login");
-				}
-			});
 		}
+		// form validation has passed
+
+		models.User.findAll({where:{email: email}}).catch(error =>{
+			if(error) {
+				throw error;
+			}
+		}).then((users) => {
+			// console.log(users)
+			if(users.length > 0) {
+				errors.push({message: "Email already registered"});
+				res.render("register", { errors })
+			} else {
+				(async() => {
+					let hashedPassword = await bcrypt.hash(password, 10);
+					models.User.create({ name: name, email: email, password: hashedPassword }).then((user) => {
+						// console.log(user);
+					}).catch(error => {
+						if(error) {
+							throw error;
+						}
+					});
+				})();
+				
+				//TODO check for error thrown
+				req.flash("success_msg", "You are now registered. Please log in");
+				res.redirect("/users/login");
+			}
+		});
 	});
 	
 	router.post(
-		"/login", 
+		"/login", (req, res, next) => {
+			req.session.email = req.body.email;
+			next();
+		},
 		passport.authenticate("local", {
 			successRedirect: "/users/dashboard", 
 			failureRedirect: "/users/login", 
@@ -200,8 +244,48 @@ module.exports = (params) => {
 
 	router.post("/account", checkNotAuthenticated, (req, res) => {
 		// TODO: handle account modification.
+		let {oldPass, newPass, newPassConfirm}  = req.body;
 
-		res.render("account");
+		if (!req.session.email)
+		{
+			res.redirect("/logout");
+		}
+
+		if (!oldPass || !newPass || !newPassConfirm)
+		{
+			let error = "Please enter all fields";
+			res.render("account", { error })
+		}
+
+		if (newPass !== newPassConfirm)
+		{
+			let error = "Error: passwords do not match";
+			res.render("account", { error });
+		}
+
+		models.User.findAll({where: {
+			email: req.session.email
+		}}).catch(() => {
+			res.redirect("/logout");
+		}).then(async users => {
+			if (users !== undefined && users.length === 1)
+			{
+				let user = users[0];
+				let error = undefined;
+				await bcrypt.compare(oldPass, user.password, (err, isMatch) => {
+					if (!isMatch)
+					{
+						let error = "Error: old password is incorrect";
+						res.render("account", { error });
+					}
+					else
+					{
+						res.render("account", {message: "Success!"});
+					}
+				});
+			}
+		});
+
 	});
 
 	router.get("/downloadCSV", isAuthenticated, async(req, res)=> {

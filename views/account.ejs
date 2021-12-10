@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Input Form</title>
+  <title>Settings</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -19,7 +19,40 @@
     <%- include('partials/sidenav') %>
     <div class='content'>
       <h1>Edit account</h1>
-    </div>
+    </div> 
+    <div class="mx-auto login-form" style="width: 200px;">
+      <ul class="login-form-nonerrors">
+          <% if(typeof message != 'undefined') { %>
+          <li><%= message %></li>
+          <% } %>
+      </ul>
+
+      <ul class="login-form-errors">
+        <% if(typeof error != 'undefined') { %> 
+       <li> <%= error %> </li>
+       <% } %> 
+      </ul>
+  </div>
+    <div class="mx-auto form-group" style="width: 200px;">
+      <form action="/users/account" class="login-form" method="POST">
+          <div class="pt-2 bottom-form">
+              <label for="oldPass">Old Password</label>
+              <input type="password" class="form-control" id="oldPass" name="oldPass" placeholder="Enter Current Password" required />
+          </div>
+          <div class="pt-2 bottom-form">
+              <label for="newPass">New Password</label>
+              <input type="password" class="form-control" id="newPass" name="newPass" placeholder="Enter New Password" required />
+          </div>
+          <div class="pt-2 bottom-form">
+              <label for="newPassConfirm">Confirm Password</label>
+              <input type="password" class="form-control" id="newPassConfirm" name="newPassConfirm" placeholder="Confirm New Password" required />
+          </div>
+          <div class="pt-2 bottom-form">
+              <input type="submit" class="btn btn-success btn-block" value="Change Password" />
+          </div>
+
+      </form>
+  </div>
 	
 </body>
 </html>
