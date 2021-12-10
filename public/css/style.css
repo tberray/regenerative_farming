@@ -19,16 +19,24 @@ body {
 }
 
 .login-form {
-    margin-left: -100px;
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.login-form-popins {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    list-style-position: inside;
 }
 
 .login-form-errors {
-    margin-left: -100px;
+    
     color: red;
 }
 
 .login-form-nonerrors {
-    margin-left: -100px;
+    
     color: black;
 }
 
@@ -42,7 +50,13 @@ body {
 }
 
 .register-text {
-    margin-left: 115px;
+    text-align: center;
+    margin-left: 94px;
+}
+
+.register-title {
+    text-align: center;
+    width: 200px;
 }
 
 .form-labels {
@@ -150,7 +164,7 @@ body {
     height: 80px;
     width: 80px;
     top: 40px;
-    left: 40%;
+    left: 50%;
     margin-left: -40px;
     visibility: visible;
 }
@@ -158,19 +172,19 @@ body {
     .mke-circle {
 
 
-        left: 43%;
+        left: 50%;
 
     }
 }
 @media only screen and (min-width: 900px) {
     .mke-circle {
-        left: 45%;
+        left: 50%;
 
     }
 }
 @media only screen and (min-width: 1200px) {
     .mke-circle {
-        left: 47%;
+        left: 50%;
 
     }
 }

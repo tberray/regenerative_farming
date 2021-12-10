@@ -34,28 +34,38 @@
     
 
     <div class="content-no-sidenav">
-        <div class="mx-auto pt-5" style="width: 200px;">
+        <div class="mx-auto pt-5 center" style="width: 200px;">
             <h2>Login</h2>
         </div>
         
-        <div class="mx-auto login-form" style="width: 200px;">
+        <!--div class="login-form-popins"-->
             <!--- <ul>s are for success and failure messages defined in server.js -->
-            <ul class="login-form-nonerrors">
+            <!--ul class="login-form-nonerrors">
                 <% if(messages.success_msg) { %>
-                <li><%= messages.success_msg %></li>
+                <li class="login-li"><%= messages.success_msg %></li>
                 <% } %>
             </ul>
 
             <ul class="login-form-errors">
                 <% if(messages.error ) { %>
-                <li><%= messages.error %> </li>
+                <li class="login-li"><%= messages.error %> </li>
                 <% } %>
             </ul>
-        </div>
+        </div--->
+
+        <% if(messages.success_msg) { %>
+        <p style="text-align: center;"><%= messages.success_msg %></p>
+        <% } %>
+
+        <% if(messages.error ) { %>
+        <p style="text-align: center; color: red;"><%= messages.error %></p>
+        <% } %>
+
+
 
         <img class="mke-circle" src="/images/1200px-University_of_Wisconsin–Milwaukee_seal.svg.png" alt="regenerative agriculture">
 
-        <div class="mx-auto form-group" style="width: 200px;">
+        <div class="mx-auto form-group" style="width: 300px;">
             <form action="/users/login" class="login-form" method="POST">
                 <div class="pt-2 bottom-form">
                     <label for="email">Email address</label>
