@@ -287,33 +287,70 @@ module.exports = (params) => {
 		});
 
 	});
-
+	
 	router.get("/downloadCSV", isAuthenticated, async(req, res)=> {
-		const csv = new ObjectsToCsv(soilDataJSON);
-		await csv.toDisk('./data.csv')
-		res.download("./data.csv", () => {
-			fs.unlinkSync("./data.csv")
-		})
+		let posts = []
+		 models.SoilEntry.findAll().catch(error =>{
+			if(error) {
+				throw error;
+			}
+		}).then((fields) => {
+			for (let field of fields) {
+				let a = {"FieldId":field.dataValues.id, "pH":field.dataValues.pH, 
+				"nitrate":field.dataValues.nitrate, "phosphorus":field.dataValues.phosphorus, 
+				"potassium":field.dataValues.potassium, "tempterature":field.dataValues.temperature,
+				"pctCo2":field.dataValues.pctCo2, "infiltration":field.dataValues.infiltration, 
+				"blkDensity":field.dataValues.blkDensity, "conductivity":field.dataValues.conductivity,
+				"aggStability":field.dataValues.aggStability, "slakingRating":field.dataValues.slakingRating,
+				"earthwormCount":field.dataValues.earthwormCount, "penResistance": field.dataValues.penResistance}
+				posts.push(a)
+				
+			}
+			(async() => {
+				const csv = new ObjectsToCsv(posts);
+				await csv.toDisk('./data.csv')
+				res.download("./data.csv", () => {
+					fs.unlinkSync("./data.csv")
+				})
+			})()
+		});
 	});
 
 	router.get("/downloadExcel", isAuthenticated, async(req, res)=> {
-		
-		const workSheet = XLSX.utils.json_to_sheet(soilDataJSON);
-    	const workBook = XLSX.utils.book_new();
+		let posts = []
+		 models.SoilEntry.findAll().catch(error =>{
+			if(error) {
+				throw error;
+			}
+		}).then((fields) => {
+			for (let field of fields) {
+				let a = {"FieldId":field.dataValues.id, "pH":field.dataValues.pH, 
+				"nitrate":field.dataValues.nitrate, "phosphorus":field.dataValues.phosphorus, 
+				"potassium":field.dataValues.potassium, "tempterature":field.dataValues.temperature,
+				"pctCo2":field.dataValues.pctCo2, "infiltration":field.dataValues.infiltration, 
+				"blkDensity":field.dataValues.blkDensity, "conductivity":field.dataValues.conductivity,
+				"aggStability":field.dataValues.aggStability, "slakingRating":field.dataValues.slakingRating,
+				"earthwormCount":field.dataValues.earthwormCount, "penResistance": field.dataValues.penResistance}
+				posts.push(a)
+				
+			}
 
-    	XLSX.utils.book_append_sheet(workBook, workSheet, "testOutput");
-    	//Generate buffer
+			const workSheet = XLSX.utils.json_to_sheet(posts);
+    		const workBook = XLSX.utils.book_new();
 
-    	XLSX.write(workBook, {bookType:'xlsx', type:'buffer'});
+    		XLSX.utils.book_append_sheet(workBook, workSheet, "testOutput");
+    		//Generate buffer
 
-    	//Binary string
-    	XLSX.write(workBook, {bookType:'xlsx', type:'binary'});
-    	XLSX.writeFile(workBook, 'outputData.xlsx');
+    		XLSX.write(workBook, {bookType:'xlsx', type:'buffer'});
 
-		res.download("./outputData.xlsx", () => {
-			fs.unlinkSync("./outputData.xlsx");
+    		//Binary string
+    		XLSX.write(workBook, {bookType:'xlsx', type:'binary'});
+    		XLSX.writeFile(workBook, 'outputData.xlsx');
+
+			res.download("./outputData.xlsx", () => {
+				fs.unlinkSync("./outputData.xlsx");
+			});
 		});
-
 	});
 
 	router.get("/downloadBlankExcel", isAuthenticated, async(req, res)=> {
