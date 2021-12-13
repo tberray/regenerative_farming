@@ -272,7 +272,7 @@ module.exports = (params) => {
 			{
 				let user = users[0];
 				let error = undefined;
-				await bcrypt.compare(oldPass, user.password, (err, isMatch) => {
+				await bcrypt.compare(oldPass, user.password, async (err, isMatch) => {
 					if (!isMatch)
 					{
 						let error = "Error: old password is incorrect";
@@ -280,6 +280,8 @@ module.exports = (params) => {
 					}
 					else
 					{
+						let hashedPassword = await bcrypt.hash(newPass, 10);
+						models.User.update({password: hashedPassword}, {where: {email: req.session.email}});
 						res.render("account", {message: "Success!"});
 					}
 				});
