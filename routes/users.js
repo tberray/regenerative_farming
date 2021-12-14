@@ -31,7 +31,7 @@ module.exports = (params) => {
 		//res.render("test", {user: req.user.name });
 		models.Field.findAll({where: {UserId:req.user.id}}).catch(error =>{
 			if(error) {
-				throw error;
+				// throw error;
 			}
 		}).then((fields) => {
 			res.render("dashboard", {
@@ -44,7 +44,7 @@ module.exports = (params) => {
 	router.get("/datainput", checkNotAuthenticated, (req, res)=> {
 		models.Field.findAll({where: {UserId:req.user.id}}).catch(error =>{
 			if(error) {
-				throw error;
+				// throw error;
 			}
 		}).then((fields) => {
 			res.render("datainput", {
@@ -200,7 +200,7 @@ module.exports = (params) => {
 
 		models.User.findAll({where:{email: email}}).catch(error =>{
 			if(error) {
-				throw error;
+				// throw error;
 			}
 		}).then((users) => {
 			// console.log(users)
@@ -214,7 +214,7 @@ module.exports = (params) => {
 						// console.log(user);
 					}).catch(error => {
 						if(error) {
-							throw error;
+							// throw error;
 						}
 					});
 				})();
@@ -272,7 +272,7 @@ module.exports = (params) => {
 			{
 				let user = users[0];
 				let error = undefined;
-				await bcrypt.compare(oldPass, user.password, (err, isMatch) => {
+				await bcrypt.compare(oldPass, user.password, async (err, isMatch) => {
 					if (!isMatch)
 					{
 						let error = "Error: old password is incorrect";
@@ -280,6 +280,8 @@ module.exports = (params) => {
 					}
 					else
 					{
+						let hashedPassword = await bcrypt.hash(newPass, 10);
+						models.User.update({password: hashedPassword}, {where: {email: req.session.email}});
 						res.render("account", {message: "Success!"});
 					}
 				});
@@ -292,7 +294,7 @@ module.exports = (params) => {
 		let posts = []
 		 models.SoilEntry.findAll().catch(error =>{
 			if(error) {
-				throw error;
+				// throw error;
 			}
 		}).then((fields) => {
 			for (let field of fields) {
@@ -320,7 +322,7 @@ module.exports = (params) => {
 		let posts = []
 		 models.SoilEntry.findAll().catch(error =>{
 			if(error) {
-				throw error;
+				// throw error;
 			}
 		}).then((fields) => {
 			for (let field of fields) {
