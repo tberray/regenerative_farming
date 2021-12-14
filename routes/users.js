@@ -454,7 +454,6 @@ module.exports = (params) => {
 						post.penResistance = worksheet[`M${2}`].v;
 					}
 					posts.push(post)
-					console.log("posts: ", posts)
 					//FieldId: 1 temp fix
 					models.SoilEntry.create({FieldId:1, pH:post.pH, nitrate:post.nitrate, phosphorus:post.phosphorus, 
 						potassium:post.potassium, tempterature:post.tempterature, pctCo2:post.pctCo2, infiltration:post.infiltration, 
